@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valor+ · Expediente digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --v-900:#0d3d2b;
+    --v-800:#0f4a34;
+    --v-700:#117c2a;
+    --v-600:#1a8a3a;
+    --lima:#3ffa8e;
+    --lima-deep:#1fbf68;
+    --white:#ffffff;
+    --paper:#f4faf6;
+    --paper-2:#eaf3ee;
+    --ink:#0d2b1e;
+    --ink-soft:#587065;
+    --line:rgba(13,43,30,0.10);
+    --warn-bg:#fff2d6;
+    --warn-ink:#a86a06;
+    --blue-bg:#e3edfb;
+    --blue-ink:#2857a8;
+    --display:'Poppins', sans-serif;
+    --sans:'Manrope', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ font-family:var(--sans); background:var(--paper-2); color:var(--ink); -webkit-font-smoothing:antialiased; }
+  svg{ display:block; }
+
+  .app{ max-width:1180px; margin:0 auto; min-height:100vh; background:var(--paper); box-shadow:0 0 60px rgba(13,61,43,.06); }
+
+  /* ---------- top bar ---------- */
+  .topbar{ display:flex; align-items:center; justify-content:space-between; padding: 14px 32px; background:#fff; border-bottom:1px solid var(--line); }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; cursor:pointer; }
+  .brand img{ height:20px; }
+  .brand .sep{ width:1px; height:18px; background:var(--line); }
+  .brand .inst{ font-family:var(--display); font-weight:700; font-size:13px; color:var(--ink-soft); }
+  .navlinks{ display:flex; gap:3px; flex-wrap:nowrap; }
+  .navlinks a{ text-decoration:none; font-size:12px; font-weight:600; color:var(--ink-soft); white-space:nowrap; padding:7px 10px; border-radius:999px; transition: all .2s ease; cursor:pointer; }
+  .navlinks a.active{ background:var(--v-900); color:#fff; }
+  .navlinks a:not(.active):hover{ background:var(--paper-2); color:var(--ink); }
+  .navlinks a.disabled{ opacity:.4; cursor:not-allowed; pointer-events:none; }
+  .userzone{ display:flex; align-items:center; gap:14px; }
+  .icon-btn{ width:36px; height:36px; border-radius:50%; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; position:relative; cursor:pointer; color:var(--ink-soft); }
+  .icon-btn .dot{ position:absolute; top:6px; right:6px; width:7px; height:7px; border-radius:50%; background:var(--v-700); border:1.5px solid #fff; }
+  .avatar{ width:36px; height:36px; border-radius:50%; background:var(--v-900); color:var(--lima); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:700; font-size:13px; }
+
+  /* ---------- hero ---------- */
+  .hero{ margin: 24px 32px 0; border-radius:24px; padding: 34px 36px; background: linear-gradient(120deg, var(--v-900) 0%, var(--v-800) 45%, var(--v-700) 100%); position:relative; overflow:hidden; color:#fff; }
+  .hero-blob{ position:absolute; right:-40px; top:-60px; width:280px; height:280px; border-radius:50%; background: radial-gradient(circle, rgba(63,250,142,.28), transparent 70%); }
+  .hero-blob2{ position:absolute; right:120px; bottom:-90px; width:220px; height:220px; border-radius:50%; background: radial-gradient(circle, rgba(63,250,142,.16), transparent 70%); }
+  .hero-top{ display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:2; }
+  .hero-eyebrow{ font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--lima); }
+  .hero h1{ font-family:var(--display); font-weight:800; font-size:28px; margin-top:8px; }
+  .hero .contract{ margin-top:8px; font-size:13.5px; color:rgba(255,255,255,.75); max-width:540px; line-height:1.5; }
+  .hero .contract b{ color:#fff; }
+  .hero-cta{ display:flex; align-items:center; gap:8px; background:transparent; color:#fff; font-family:var(--display); font-weight:700; font-size:13px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:11px 20px; cursor:pointer; white-space:nowrap; position:relative; z-index:2; transition: all .2s ease; }
+  .hero-cta:hover{ background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.7); }
+  .hero-meta{ display:flex; gap:28px; margin-top:26px; position:relative; z-index:2; }
+  .hm-item .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:rgba(255,255,255,.55); }
+  .hm-item .val{ font-family:var(--display); font-weight:700; font-size:16px; margin-top:4px; }
+
+  /* ---------- content grid ---------- */
+  .content{ padding: 26px 32px 40px; display:grid; grid-template-columns: 1.55fr 1fr; gap:20px; align-items:start; }
+
+  .card{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 24px; }
+  .card-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; gap:12px; }
+  .card-head h2{ font-family:var(--display); font-weight:700; font-size:15px; color:var(--ink); }
+  .card-head .sub{ font-size:12px; color:var(--ink-soft); margin-top:3px; }
+  .card-head .link{ font-size:12.5px; font-weight:700; color:var(--v-700); text-decoration:none; cursor:pointer; }
+
+  /* fixed package doc rows */
+  .doc-row{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .doc-row:last-child{ border-bottom:none; }
+  .doc-row .ic{ width:34px; height:34px; border-radius:9px; background:var(--paper-2); color:var(--v-700); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .doc-row .info{ flex:1; min-width:0; }
+  .doc-row .name{ font-size:13.5px; color:var(--ink); font-weight:600; }
+  .doc-row .meta{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .doc-row .tag{ font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:4px 9px; border-radius:999px; white-space:nowrap; }
+  .doc-row .dl{ width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; color:var(--ink-soft); cursor:pointer; flex-shrink:0; transition: all .15s ease; }
+  .doc-row .dl:hover{ border-color:var(--v-700); color:var(--v-700); background:rgba(17,124,42,.05); }
+
+  .tag.ok{ background:rgba(17,124,42,.1); color:var(--v-700); }
+  .tag.pending{ background:var(--paper-2); color:var(--ink-soft); }
+  .tag.warn{ background:var(--warn-bg); color:var(--warn-ink); }
+  .tag.erp{ background:var(--blue-bg); color:var(--blue-ink); }
+
+  /* month folders (accordion) */
+  .folders{ display:flex; flex-direction:column; gap:12px; }
+  .folder{ border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .folder-head{ display:flex; align-items:center; gap:14px; padding:16px 18px; cursor:pointer; background:var(--paper); transition: background .15s ease; }
+  .folder-head:hover{ background:var(--paper-2); }
+  .folder-head .fic{ width:38px; height:38px; border-radius:10px; background:var(--v-900); color:var(--lima); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .folder-head .ftxt{ flex:1; }
+  .folder-head .ftitle{ font-family:var(--display); font-weight:700; font-size:13.5px; color:var(--ink); }
+  .folder-head .fsub{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .folder-head .fchev{ color:var(--ink-soft); transition: transform .2s ease; flex-shrink:0; }
+  .folder.open .fchev{ transform:rotate(180deg); }
+  .folder-body{ max-height:0; overflow:hidden; transition: max-height .25s ease; background:#fff; }
+  .folder.open .folder-body{ max-height:700px; }
+  .folder-body-inner{ padding:6px 18px 14px; }
+  .folder-body-inner .doc-row{ padding:10px 0; }
+  .erp-group-lbl{ font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--blue-ink); margin:10px 0 2px; padding-top:8px; border-top:1px dashed var(--line); }
+
+  /* sidebar */
+  .side-stack{ display:flex; flex-direction:column; gap:20px; }
+  .search-box{ position:relative; margin-bottom:14px; }
+  .search-box input{ width:100%; border:1.5px solid var(--line); border-radius:10px; padding:10px 13px 10px 38px; font-family:var(--sans); font-size:13px; color:var(--ink); background:var(--paper); }
+  .search-box input:focus{ outline:none; border-color:var(--v-700); background:#fff; box-shadow:0 0 0 3px rgba(17,124,42,.1); }
+  .search-box svg{ position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--ink-soft); }
+  .filter-pills{ display:flex; gap:6px; flex-wrap:wrap; }
+  .filter-pill{ border:1px solid var(--line); background:var(--paper); color:var(--ink-soft); font-size:11.5px; font-weight:700; padding:6px 12px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
+  .filter-pill.sel{ background:var(--v-900); color:#fff; border-color:var(--v-900); }
+
+  .mini-metric{ display:flex; align-items:center; gap:14px; }
+  .mini-metric + .mini-metric{ margin-top:16px; }
+  .mini-metric .ic-box{ width:44px; height:44px; border-radius:12px; background:var(--v-900); color:var(--lima); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .mini-metric .lbl{ font-size:12px; color:var(--ink-soft); }
+  .mini-metric .val{ font-family:var(--display); font-weight:700; font-size:16px; color:var(--ink); margin-top:2px; }
+
+  .help-note{ background:var(--paper-2); border-radius:12px; padding:14px 16px; display:flex; gap:12px; align-items:flex-start; font-size:12.5px; color:var(--ink-soft); line-height:1.55; }
+  .help-note .ic{ color:var(--v-700); flex-shrink:0; margin-top:1px; }
+  .help-note b{ color:var(--ink); }
+  .help-note + .help-note{ margin-top:12px; }
+  .help-note.muted .ic{ color:var(--ink-soft); }
+
+  @media (max-width: 860px){
+    .content{ grid-template-columns:1fr; }
+    .navlinks{ display:none; }
+    .hero-top{ flex-direction:column; gap:16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="topbar">
+    <a class="brand" href="2_home_template.html">
+      <img id="logoImg" alt="Valor+">
+      <div class="sep"></div>
+      <div class="inst">Portal del contratista</div>
+    </a>
+    <div class="navlinks">
+      <a href="2_home_template.html">Inicio</a>
+      <a href="7_mis_contratistas_template.html">Mis contratistas</a>
+      <a href="3_inscribir_contrato_template.html">Inscribir contratista</a>
+      <a href="4_cargar_cuenta_cobro_template.html">Cuentas de cobro</a>
+      <a href="5_expediente_template.html" class="active">Expedientes</a>
+      <a href="6_aprobaciones_template.html">Aprobaciones</a>
+      <a href="8_reporte_ejecucion_template.html">Reporte</a>
+      <a class="disabled" title="Próximamente">Ayuda</a>
+    </div>
+    <div class="userzone">
+      <div class="icon-btn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span class="dot"></span>
+      </div>
+      <div class="avatar">CR</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-blob"></div>
+    <div class="hero-blob2"></div>
+    <div class="hero-top">
+      <div>
+        <div class="hero-eyebrow">Expediente digital</div>
+        <h1>Tu expediente digital</h1>
+        <div class="contract">Contrato <b>CT-2026-0142</b> · Supervisor <b>Julián Vélez</b> · Persona natural. Todos los documentos aprobados de tu contrato quedan organizados aquí, mes a mes.</div>
+      </div>
+      <button class="hero-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Descargar todo
+      </button>
+    </div>
+    <div class="hero-meta">
+      <div class="hm-item"><div class="lbl">Documentos totales</div><div class="val">14</div></div>
+      <div class="hm-item"><div class="lbl">Carpetas mensuales</div><div class="val">3</div></div>
+      <div class="hm-item"><div class="lbl">Última actualización</div><div class="val">Hoy, 9:14 a.m.</div></div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div style="display:flex; flex-direction:column; gap:20px;">
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Documentos iniciales del contrato</h2>
+            <div class="sub">Paquete fijo cargado por tu supervisor al inicio · se usa en cada cuenta de cobro</div>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+          <div class="info"><div class="name">CDP · Certificado de disponibilidad presupuestal</div><div class="meta">Cargado por Julián Vélez · Ene 2026</div></div>
+          <span class="tag ok">Vigente</span>
+          <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+        </div>
+        <div class="doc-row">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+          <div class="info"><div class="name">RP · Registro presupuestal</div><div class="meta">Cargado por Julián Vélez · Ene 2026</div></div>
+          <span class="tag ok">Vigente</span>
+          <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Carpetas por cuenta de cobro</h2>
+            <div class="sub">Un expediente por mes, con todos sus documentos y soportes</div>
+          </div>
+        </div>
+
+        <div class="folders" id="folders">
+
+          <!-- Agosto - en curso -->
+          <div class="folder open" data-folder>
+            <div class="folder-head" onclick="toggleFolder(this)">
+              <div class="fic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></div>
+              <div class="ftxt"><div class="ftitle">Agosto 2026</div><div class="fsub">2 de 4 documentos aprobados · en revisión por el supervisor</div></div>
+              <span class="tag warn" style="margin-right:6px;">En proceso</span>
+              <svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="folder-body">
+              <div class="folder-body-inner">
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Cuenta de cobro · Agosto</div><div class="meta">Cargado por ti · Hoy, 8:40 a.m.</div></div>
+                  <span class="tag ok">Aprobado</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Planilla de seguridad social</div><div class="meta">Cargado por ti · Hoy, 8:41 a.m.</div></div>
+                  <span class="tag ok">Aprobado</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Evidencias de la actividad</div><div class="meta">Devuelta con novedad · Hoy, 9:14 a.m.</div></div>
+                  <span class="tag warn">Con novedad</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+                  <div class="info"><div class="name">Informe de actividades</div><div class="meta">A cargo de Julián Vélez</div></div>
+                  <span class="tag pending">Pendiente</span>
+                  <div class="dl" style="opacity:.4; cursor:not-allowed;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Julio - completo con ERP -->
+          <div class="folder" data-folder>
+            <div class="folder-head" onclick="toggleFolder(this)">
+              <div class="fic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></div>
+              <div class="ftxt"><div class="ftitle">Julio 2026</div><div class="fsub">6 de 6 documentos · expediente completo</div></div>
+              <span class="tag ok" style="margin-right:6px;">Pagada</span>
+              <svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="folder-body">
+              <div class="folder-body-inner">
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Cuenta de cobro · Julio</div><div class="meta">Cargado por ti · 2 jul, 8:12 a.m.</div></div>
+                  <span class="tag ok">Aprobado</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Planilla de seguridad social</div><div class="meta">Cargado por ti · 2 jul, 8:13 a.m.</div></div>
+                  <span class="tag ok">Aprobado</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Evidencias de la actividad</div><div class="meta">Cargado por ti · 2 jul, 8:15 a.m.</div></div>
+                  <span class="tag ok">Aprobado</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+                  <div class="info"><div class="name">Informe de actividades</div><div class="meta">Cargado por Julián Vélez · 4 jul</div></div>
+                  <span class="tag ok">Aprobado</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+
+                <div class="erp-group-lbl">Documentos generados en el ERP</div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Orden de pago</div><div class="meta">Subido por financiera tras causación · 10 jul</div></div>
+                  <span class="tag erp">ERP</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Comprobante de egreso</div><div class="meta">Subido por financiera · 15 jul</div></div>
+                  <span class="tag erp">ERP</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Junio - completo -->
+          <div class="folder" data-folder>
+            <div class="folder-head" onclick="toggleFolder(this)">
+              <div class="fic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></div>
+              <div class="ftxt"><div class="ftitle">Junio 2026</div><div class="fsub">6 de 6 documentos · expediente completo</div></div>
+              <span class="tag ok" style="margin-right:6px;">Pagada</span>
+              <svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="folder-body">
+              <div class="folder-body-inner">
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Cuenta de cobro · Junio</div><div class="meta">Cargado por ti · 1 jun</div></div>
+                  <span class="tag ok">Aprobado</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+                <div class="erp-group-lbl">Documentos generados en el ERP</div>
+                <div class="doc-row">
+                  <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg></span>
+                  <div class="info"><div class="name">Orden de pago</div><div class="meta">Subido por financiera · 12 jun</div></div>
+                  <span class="tag erp">ERP</span>
+                  <div class="dl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side-stack">
+
+      <div class="card">
+        <div class="card-head"><h2>Buscar en tu expediente</h2></div>
+        <div class="search-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" placeholder="Nombre del documento o mes…">
+        </div>
+        <div class="filter-pills">
+          <button class="filter-pill sel">Todos</button>
+          <button class="filter-pill">Aprobados</button>
+          <button class="filter-pill">Pendientes</button>
+          <button class="filter-pill">Del ERP</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Resumen</h2></div>
+        <div class="mini-metric">
+          <div class="ic-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg></div>
+          <div><div class="lbl">Documentos totales</div><div class="val">14</div></div>
+        </div>
+        <div class="mini-metric">
+          <div class="ic-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <div><div class="lbl">Cuentas de cobro pagadas</div><div class="val">2 de 3</div></div>
+        </div>
+        <div class="mini-metric">
+          <div class="ic-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><div class="lbl">Documentos pendientes</div><div class="val">1</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Sobre tu expediente</h2></div>
+        <div class="help-note">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span>Este expediente vive en el mismo almacenamiento seguro del portal. Cada carpeta corresponde a una cuenta de cobro.</span>
+        </div>
+        <div class="help-note muted">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <span>La asociación con tu carpeta física de archivo y las reglas de retención documental están <b>en definición</b> con el equipo de gestión documental.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('logoImg').src = "data:image/png;base64,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";
+
+  function toggleFolder(headEl){
+    const folder = headEl.closest('.folder');
+    folder.classList.toggle('open');
+  }
+
+  document.querySelectorAll('.filter-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(x => x.classList.remove('sel'));
+      p.classList.add('sel');
+    });
+  });
+</script>
+
+<script>
+  // ---- Sesión por rol (login → navegación filtrada) ----
+  (function(){
+    const PAGES = ['2_home_template.html','3_inscribir_contrato_template.html','4_cargar_cuenta_cobro_template.html','5_expediente_template.html','6_aprobaciones_template.html','7_mis_contratistas_template.html','8_reporte_ejecucion_template.html'];
+    const ROLE_MENUS = {
+      admin: null, // null = ve todas las opciones
+      supervisor: ['7_mis_contratistas_template.html','3_inscribir_contrato_template.html','5_expediente_template.html','6_aprobaciones_template.html'],
+      contratista: ['2_home_template.html','4_cargar_cuenta_cobro_template.html','5_expediente_template.html']
+    };
+    const ROLE_LABELS = { admin: 'Administrador', supervisor: 'Supervisor', contratista: 'Contratista' };
+
+    const role = new URLSearchParams(window.location.search).get('role');
+
+    if (role && ROLE_MENUS.hasOwnProperty(role)) {
+      const allowed = ROLE_MENUS[role];
+
+      // Filtrar ítems del menú según el rol
+      if (allowed) {
+        document.querySelectorAll('.navlinks a').forEach(a => {
+          const href = a.getAttribute('href');
+          if (!href || !allowed.includes(href)) a.style.display = 'none';
+        });
+      }
+
+      // Insignia de rol + salir, junto al avatar/usuario
+      const userzone = document.querySelector('.userzone');
+      if (userzone) {
+        const badge = document.createElement('div');
+        badge.style.cssText = 'display:flex; align-items:center; gap:10px; font-size:12px; font-weight:700; color:var(--ink-soft); white-space:nowrap;';
+        const roleSpan = document.createElement('span');
+        roleSpan.style.cssText = 'background:rgba(17,124,42,.08); color:var(--v-700); padding:6px 12px; border-radius:999px;';
+        roleSpan.textContent = ROLE_LABELS[role] || role;
+        const logout = document.createElement('a');
+        logout.href = '9_login_template.html';
+        logout.textContent = 'Salir';
+        logout.style.cssText = 'color:var(--ink-soft); text-decoration:none; cursor:pointer;';
+        logout.addEventListener('mouseenter', () => logout.style.color = 'var(--v-700)');
+        logout.addEventListener('mouseleave', () => logout.style.color = 'var(--ink-soft)');
+        badge.appendChild(roleSpan);
+        badge.appendChild(logout);
+        userzone.prepend(badge);
+      }
+    }
+
+    // Propagar el rol en todos los enlaces internos para mantener la sesión al navegar
+    if (role) {
+      document.querySelectorAll('a[href]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (PAGES.includes(href)) a.setAttribute('href', href + '?role=' + role);
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
