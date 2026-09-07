@@ -357,10 +357,29 @@
 
         <div class="divider-lbl">Valor y vigencia</div>
         <div class="field-grid">
-          <div class="field"><label>Valor mensual</label><input type="text" placeholder="$ 0"></div>
-          <div class="field"><label>Valor total del contrato</label><input type="text" placeholder="$ 0"></div>
+          <div class="field"><label>Valor total del contrato</label><input type="text" id="valorTotal" placeholder="$ 0" oninput="validarValorPagos()"></div>
+          <div class="field"><label>Periodicidad de pago</label>
+            <select id="periodicidad" onchange="validarValorPagos()">
+              <option value="">Selecciona…</option>
+              <option value="mensual">Mensual</option>
+              <option value="bimestral">Bimestral</option>
+              <option value="trimestral">Trimestral</option>
+              <option value="semestral">Semestral</option>
+              <option value="anual">Anual</option>
+              <option value="unico">Pago único</option>
+            </select>
+          </div>
+          <div class="field"><label>Valor por pago</label><input type="text" id="valorPorPago" placeholder="$ 0" oninput="validarValorPagos()"></div>
+          <div class="field"><label>Cantidad de pagos</label><input type="number" id="cantidadPagos" min="1" placeholder="Ej. 12" oninput="validarValorPagos()">
+            <div class="hint">Valor por pago × cantidad de pagos debería coincidir con el valor total del contrato.</div>
+          </div>
           <div class="field"><label>Fecha de inicio</label><input type="date"></div>
           <div class="field"><label>Fecha de finalización</label><input type="date"></div>
+        </div>
+
+        <div class="ret-banner" id="alertaValorPagos" style="display:none; align-items:flex-start; gap:12px; background:var(--warn-bg); color:var(--warn-ink); border-radius:14px; padding:14px 16px; margin-top:16px; font-size:13px; line-height:1.5;">
+          <span class="ic" style="flex-shrink:0; margin-top:1px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.86 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.86a2 2 0 0 0-3.4 0Z"/></svg></span>
+          <div><b style="display:block; font-family:var(--display); font-weight:700; font-size:12.5px; margin-bottom:3px; text-transform:uppercase; letter-spacing:.03em;">Revisa los valores</b><span id="alertaValorPagosTexto"></span></div>
         </div>
 
         <div class="wizard-nav">
@@ -464,7 +483,8 @@
         <div class="summary-row"><span class="k">Contratista</span><span class="v muted" id="sumNombre">Sin definir</span></div>
         <div class="summary-row"><span class="k">Contrato</span><span class="v muted" id="sumContrato">Sin definir</span></div>
         <div class="summary-row"><span class="k">Supervisor</span><span class="v">Julián Vélez</span></div>
-        <div class="summary-row"><span class="k">Valor mensual</span><span class="v muted" id="sumValor">Sin definir</span></div>
+        <div class="summary-row"><span class="k">Valor por pago</span><span class="v muted" id="sumValor">Sin definir</span></div>
+        <div class="summary-row"><span class="k">Periodicidad</span><span class="v muted" id="sumPeriodicidad">Sin definir</span></div>
       </div>
 
       <div class="card">
@@ -573,6 +593,55 @@
   document.querySelectorAll('#wizardStepper .step').forEach(s => {
     s.addEventListener('click', () => goStep(parseInt(s.dataset.step)));
   });
+
+  // Valor y vigencia: validar valor por pago × cantidad de pagos vs. valor total
+  const periodicidadLabels = {
+    mensual: 'Mensual', bimestral: 'Bimestral', trimestral: 'Trimestral',
+    semestral: 'Semestral', anual: 'Anual', unico: 'Pago único'
+  };
+
+  function parseMoney(str){
+    if(!str) return 0;
+    const n = parseFloat(String(str).replace(/[^0-9.,]/g, '').replace(/\./g,'').replace(',','.'));
+    return isNaN(n) ? 0 : n;
+  }
+
+  function formatMoney(n){
+    return '$ ' + Math.round(n).toLocaleString('es-CO');
+  }
+
+  function validarValorPagos(){
+    const valorTotal = parseMoney(document.getElementById('valorTotal').value);
+    const valorPorPago = parseMoney(document.getElementById('valorPorPago').value);
+    const cantidadPagos = parseInt(document.getElementById('cantidadPagos').value) || 0;
+    const periodicidad = document.getElementById('periodicidad').value;
+
+    // Actualizar resumen lateral
+    document.getElementById('sumValor').textContent = valorPorPago > 0 ? formatMoney(valorPorPago) : 'Sin definir';
+    document.getElementById('sumValor').classList.toggle('muted', valorPorPago === 0);
+    document.getElementById('sumPeriodicidad').textContent = periodicidad ? periodicidadLabels[periodicidad] : 'Sin definir';
+    document.getElementById('sumPeriodicidad').classList.toggle('muted', !periodicidad);
+
+    const alerta = document.getElementById('alertaValorPagos');
+    const alertaTexto = document.getElementById('alertaValorPagosTexto');
+
+    if (valorTotal > 0 && valorPorPago > 0 && cantidadPagos > 0) {
+      const calculado = valorPorPago * cantidadPagos;
+      if (calculado > valorTotal) {
+        const diferencia = calculado - valorTotal;
+        alertaTexto.textContent = 'El valor por pago × cantidad de pagos (' + formatMoney(calculado) + ') supera el valor total del contrato en ' + formatMoney(diferencia) + '. Revisa los valores antes de continuar.';
+        alerta.style.display = 'flex';
+      } else if (calculado < valorTotal) {
+        const diferencia = valorTotal - calculado;
+        alertaTexto.textContent = 'El valor por pago × cantidad de pagos (' + formatMoney(calculado) + ') queda ' + formatMoney(diferencia) + ' por debajo del valor total del contrato. Verifica si falta algún pago o ajustar el valor.';
+        alerta.style.display = 'flex';
+      } else {
+        alerta.style.display = 'none';
+      }
+    } else {
+      alerta.style.display = 'none';
+    }
+  }
 </script>
 
 <script>
