@@ -582,9 +582,10 @@
     const ROLE_MENUS = {
       admin: null, // null = ve todas las opciones
       supervisor: ['7_mis_contratistas_template.html','3_inscribir_contrato_template.html','5_expediente_template.html','6_aprobaciones_template.html'],
-      contratista: ['2_home_template.html','4_cargar_cuenta_cobro_template.html','5_expediente_template.html']
+      contratista: ['2_home_template.html','4_cargar_cuenta_cobro_template.html','5_expediente_template.html'],
+      financiera: ['6_aprobaciones_template.html','5_expediente_template.html']
     };
-    const ROLE_LABELS = { admin: 'Administrador', supervisor: 'Supervisor', contratista: 'Contratista' };
+    const ROLE_LABELS = { admin: 'Administrador', supervisor: 'Supervisor', contratista: 'Contratista', financiera: 'Financiera' };
 
     const role = new URLSearchParams(window.location.search).get('role');
 

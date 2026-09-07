@@ -226,6 +226,49 @@
     background:var(--warn-bg); color:var(--warn-ink); padding:3px 9px; border-radius:999px;
   }
 
+  /* ---------- pestañas de financiera ---------- */
+  .tab-bar{ display:flex; gap:8px; padding: 18px 32px 0; flex-wrap:wrap; }
+  .tab-pill{
+    display:flex; align-items:center; gap:8px; font-family:var(--display); font-weight:700; font-size:12.5px;
+    color:var(--ink-soft); background:#fff; border:1.5px solid var(--line); border-radius:999px;
+    padding:10px 16px; cursor:pointer; transition: all .18s ease;
+  }
+  .tab-pill:hover{ border-color:var(--v-600); color:var(--ink); }
+  .tab-pill.sel{ background:var(--v-900); border-color:var(--v-900); color:#fff; }
+  .tab-pill .cnt{
+    font-size:10.5px; background:rgba(255,255,255,.2); padding:2px 7px; border-radius:999px; font-weight:700;
+  }
+  .tab-pill:not(.sel) .cnt{ background:var(--paper-2); color:var(--ink-soft); }
+  .qrow .q-ret{
+    font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--bad-ink);
+    background:var(--bad-bg); padding:2px 8px; border-radius:999px; white-space:nowrap;
+  }
+
+  /* ---------- banner de devolución (financiera → supervisor) ---------- */
+  .ret-banner{
+    display:none; align-items:flex-start; gap:12px; background:var(--bad-bg); color:var(--bad-ink);
+    border-radius:14px; padding:14px 16px; margin-bottom:18px; font-size:13px; line-height:1.5;
+  }
+  .ret-banner.show{ display:flex; }
+  .ret-banner .ic{ flex-shrink:0; margin-top:1px; }
+  .ret-banner b{ display:block; font-family:var(--display); font-weight:700; font-size:12.5px; margin-bottom:3px; text-transform:uppercase; letter-spacing:.03em; }
+
+  /* ---------- checklist de carga ERP (María Elena) ---------- */
+  .erp-item{
+    display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); font-size:13.5px;
+  }
+  .erp-item:last-child{ border-bottom:none; }
+  .erp-item .name{ flex:1; color:var(--ink); min-width:0; }
+  .erp-item .name .sub{ display:block; font-size:11px; color:var(--ink-soft); font-weight:500; margin-top:1px; }
+  .erp-upload-btn{
+    display:flex; align-items:center; gap:6px; font-family:var(--display); font-weight:700; font-size:11.5px;
+    color:var(--v-700); background:rgba(17,124,42,.08); border:none; border-radius:999px; padding:7px 12px;
+    cursor:pointer; white-space:nowrap; transition: all .15s ease;
+  }
+  .erp-upload-btn:hover{ background:rgba(17,124,42,.16); }
+  .erp-upload-btn.done{ color:var(--ink-soft); background:var(--paper-2); cursor:default; }
+  .btn-lima:disabled{ opacity:.45; cursor:not-allowed; transform:none !important; }
+
   @media (max-width: 860px){
     .content{ grid-template-columns:1fr; }
     .navlinks{ display:none; }
@@ -233,6 +276,7 @@
     .qrow{ flex-wrap:wrap; }
     .wizard-nav{ flex-direction:column-reverse; }
     .wizard-nav .btn{ width:100%; justify-content:center; }
+    .tab-bar{ padding:16px 20px 0; }
   }
 </style>
 </head>
@@ -264,6 +308,8 @@
       <div class="avatar">JV</div>
     </div>
   </div>
+
+  <div id="view-supervisor">
 
   <div class="hero">
     <div class="hero-blob"></div>
@@ -336,6 +382,16 @@
             <div class="q-wait"><b>Hoy</b>vuelta a cargar</div>
             <svg class="q-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
           </div>
+          <div class="qrow" data-name="Diego Serna" data-init="DS" data-contrato="CT-2026-0119" data-tipo="Persona natural" data-returned="financiera" data-motivo="Adriana (financiera) encontró que el valor de la cuenta de cobro no coincide con el valor mensual del contrato. Corregir el documento y volver a enviar.">
+            <div class="q-avatar">DS</div>
+            <div class="q-main">
+              <div class="q-name">Diego Serna</div>
+              <div class="q-sub">CT-2026-0119 · Persona natural · Cuenta de cobro de agosto</div>
+            </div>
+            <span class="q-ret">Financiera</span>
+            <div class="q-wait"><b>Hoy</b>devuelta</div>
+            <svg class="q-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
         </div>
       </div>
 
@@ -345,6 +401,11 @@
             <h2 id="detName">Revisión — Camila Restrepo</h2>
             <div class="sub" id="detSub">CT-2026-0142 · Persona natural · Cuenta de cobro de agosto</div>
           </div>
+        </div>
+
+        <div class="ret-banner" id="finBanner">
+          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.86 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.86a2 2 0 0 0-3.4 0Z"/></svg></span>
+          <div><b>Devuelta por revisión financiera</b><span id="finBannerMotivo"></span></div>
         </div>
 
         <div class="divider-lbl">Checklist de documentos <span class="count">4 de 5 cargados</span></div>
@@ -490,6 +551,352 @@
 
   </div>
 
+  </div><!-- /view-supervisor -->
+
+  <div id="view-financiera" style="display:none;">
+
+    <div class="hero">
+      <div class="hero-blob"></div>
+      <div class="hero-blob2"></div>
+      <div class="hero-top">
+        <div>
+          <div class="hero-eyebrow">Aprobación 2 y 3 · Financiera</div>
+          <h1>Revisión financiera y causación</h1>
+          <div class="contract">Adriana revisa con detalle todos los documentos antes de causar el pago; si algo no cuadra, la cuenta vuelve al supervisor. Una vez aprobada, María Elena causa en el ERP y carga aquí los soportes para completar el expediente.</div>
+        </div>
+        <button class="hero-cta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Ver historial de aprobaciones
+        </button>
+      </div>
+      <div class="hero-meta">
+        <div class="hm-item"><div class="lbl">Pendientes de revisión financiera</div><div class="val flag">3</div></div>
+        <div class="hm-item"><div class="lbl">Pendientes de causación ERP</div><div class="val">2</div></div>
+        <div class="hm-item"><div class="lbl">Completadas este mes</div><div class="val">11</div></div>
+        <div class="hm-item"><div class="lbl">Próxima fecha de corte</div><div class="val">30 de agosto</div></div>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab-pill sel" data-fintab="revision">
+        Revisión financiera · Adriana <span class="cnt">3</span>
+      </div>
+      <div class="tab-pill" data-fintab="erp">
+        Carga de documentos ERP · María Elena <span class="cnt">2</span>
+      </div>
+    </div>
+
+    <!-- ===== TAB: Revisión financiera (Adriana) ===== -->
+    <div class="content" id="fintab-revision">
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Cola de revisión financiera</h2>
+              <div class="sub">Cuentas ya aprobadas por el supervisor, esperando tu revisión</div>
+            </div>
+            <span class="link">Ver todas</span>
+          </div>
+          <div class="queue" id="queueFinRev">
+            <div class="qrow sel" data-name="Julián Torres" data-init="JT" data-contrato="CT-2026-0087" data-tipo="Persona natural">
+              <div class="q-avatar">JT</div>
+              <div class="q-main">
+                <div class="q-name">Julián Torres</div>
+                <div class="q-sub">CT-2026-0087 · Persona natural · Aprobada por supervisor</div>
+              </div>
+              <div class="q-wait"><b>1 día</b>en espera</div>
+              <svg class="q-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+            <div class="qrow" data-name="Estrategias Ambientales Ltda." data-init="EA" data-contrato="CT-2026-0033" data-tipo="Persona jurídica">
+              <div class="q-avatar">EA</div>
+              <div class="q-main">
+                <div class="q-name">Estrategias Ambientales Ltda.</div>
+                <div class="q-sub">CT-2026-0033 · Persona jurídica · Aprobada por supervisor</div>
+              </div>
+              <div class="q-wait"><b>3 días</b>en espera</div>
+              <svg class="q-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+            <div class="qrow" data-name="Paula Osorio" data-init="PO" data-contrato="CT-2026-0164" data-tipo="Persona natural">
+              <div class="q-avatar">PO</div>
+              <div class="q-main">
+                <div class="q-name">Paula Osorio</div>
+                <div class="q-sub">CT-2026-0164 · Persona natural · Aprobada por supervisor</div>
+              </div>
+              <div class="q-wait"><b>2 días</b>en espera</div>
+              <svg class="q-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 id="finRevName">Revisión financiera — Julián Torres</h2>
+              <div class="sub" id="finRevSub">CT-2026-0087 · Persona natural · Cuenta de cobro de agosto</div>
+            </div>
+          </div>
+
+          <div class="divider-lbl">Checklist de documentos <span class="count">5 de 5 aprobados por el supervisor</span></div>
+          <ul class="checklist">
+            <li>
+              <span class="chk-icon ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="name">Cuenta de cobro</span>
+              <span class="tag ok">Sin novedad</span>
+              <span class="doc-actions">
+                <button class="view" title="Ver documento"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="flag" title="Marcar novedad" onclick="toggleFlag(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4a1 1 0 0 1 1-1h11l3 4-3 4H5"/></svg></button>
+              </span>
+            </li>
+            <li>
+              <span class="chk-icon ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="name">Planilla de seguridad social</span>
+              <span class="tag ok">Sin novedad</span>
+              <span class="doc-actions">
+                <button class="view" title="Ver documento"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="flag" title="Marcar novedad" onclick="toggleFlag(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4a1 1 0 0 1 1-1h11l3 4-3 4H5"/></svg></button>
+              </span>
+            </li>
+            <li>
+              <span class="chk-icon ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="name">Evidencias de la actividad</span>
+              <span class="tag ok">Sin novedad</span>
+              <span class="doc-actions">
+                <button class="view" title="Ver documento"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="flag" title="Marcar novedad" onclick="toggleFlag(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4a1 1 0 0 1 1-1h11l3 4-3 4H5"/></svg></button>
+              </span>
+            </li>
+            <li>
+              <span class="chk-icon ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="name">Informe de actividades</span>
+              <span class="tag ok">Sin novedad</span>
+              <span class="doc-actions">
+                <button class="view" title="Ver documento"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="flag" title="Marcar novedad" onclick="toggleFlag(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4a1 1 0 0 1 1-1h11l3 4-3 4H5"/></svg></button>
+              </span>
+            </li>
+            <li>
+              <span class="chk-icon pending"></span>
+              <span class="name">Certificado bancario<span class="sub">No requerido este mes</span></span>
+              <span class="tag pending">No aplica</span>
+              <span class="doc-actions">
+                <button class="view" title="No cargado" disabled style="opacity:.4; cursor:not-allowed;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              </span>
+            </li>
+          </ul>
+
+          <div class="divider-lbl">Validación financiera</div>
+          <div class="val-list">
+            <div class="val-item ok">
+              <span class="vi-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <div>
+                <div class="vi-title">Valor de la cuenta de cobro</div>
+                <div class="vi-desc">Coincide con el valor mensual pactado en el contrato ($3.800.000).</div>
+              </div>
+            </div>
+            <div class="val-item ok">
+              <span class="vi-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <div>
+                <div class="vi-title">CDP y RP</div>
+                <div class="vi-desc">Vigentes y con saldo disponible para este pago.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider-lbl">Novedad</div>
+          <div class="field">
+            <label>Detalle de la novedad <span class="opt">(obligatorio si vas a devolver)</span></label>
+            <textarea placeholder="Ej. El valor de la cuenta de cobro no coincide con el valor mensual del contrato."></textarea>
+            <div class="hint">Al devolver, la cuenta vuelve a la bandeja del supervisor — él decide si la reenvía al contratista. El contratista solo podrá editar el documento marcado.</div>
+          </div>
+
+          <div class="wizard-nav">
+            <button class="btn btn-warn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 22V4a1 1 0 0 1 1-1h11l3 4-3 4H5"/></svg>
+              Devolver al supervisor con novedad
+            </button>
+            <button class="btn btn-lima">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>
+              Aprobar y enviar a causación
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="side-stack">
+
+        <div class="card">
+          <div class="card-head"><h2>Datos del contrato</h2></div>
+          <div class="summary-row"><span class="k">Contratista</span><span class="v" id="finRevSumNombre">Julián Torres</span></div>
+          <div class="summary-row"><span class="k">Contrato</span><span class="v" id="finRevSumContrato">CT-2026-0087</span></div>
+          <div class="summary-row"><span class="k">Tipo</span><span class="v" id="finRevSumTipo">Persona natural</span></div>
+          <div class="summary-row"><span class="k">Valor mensual</span><span class="v">$3.800.000</span></div>
+          <div class="summary-row"><span class="k">Vigencia</span><span class="v">Feb — Dic 2026</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2>Historial de esta cuenta</h2></div>
+          <div class="notif"><span class="dot"></span><p>El contratista <b>cargó</b> la cuenta de cobro de agosto.<br><span>Hace 3 días, 10:10 a.m.</span></p></div>
+          <div class="notif"><span class="dot"></span><p>El supervisor <b>aprobó</b> la cuenta y la envió a revisión financiera.<br><span>Hace 1 día, 4:45 p.m.</span></p></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2>Notas del proceso</h2></div>
+          <div class="help-note">
+            <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.86 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.86a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <span>A diferencia del supervisor, financiera revisa <b>todos</b> los documentos del expediente antes de aprobar, no solo los marcados.</span>
+          </div>
+          <div class="help-note">
+            <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4a1 1 0 0 1 1-1h11l3 4-3 4H5"/></svg></span>
+            <span>Si devuelves con novedad, la cuenta vuelve al <b>supervisor</b> — no directo al contratista.</span>
+          </div>
+          <div class="help-note" style="margin-top:12px;">
+            <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <span>Al aprobar, la cuenta pasa a <b>causación ERP</b> (María Elena).</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ===== TAB: Carga de documentos ERP (María Elena) ===== -->
+    <div class="content" id="fintab-erp" style="display:none;">
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Cola de causación</h2>
+              <div class="sub">Cuentas aprobadas por revisión financiera, listas para causar en el ERP</div>
+            </div>
+            <span class="link">Ver todas</span>
+          </div>
+          <div class="queue" id="queueFinErp">
+            <div class="qrow sel" data-name="Camila Restrepo" data-init="CR" data-contrato="CT-2026-0142" data-tipo="Persona natural">
+              <div class="q-avatar">CR</div>
+              <div class="q-main">
+                <div class="q-name">Camila Restrepo</div>
+                <div class="q-sub">CT-2026-0142 · Persona natural · Aprobada por financiera</div>
+              </div>
+              <div class="q-wait"><b>1 día</b>en espera</div>
+              <svg class="q-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+            <div class="qrow" data-name="Grupo Vial S.A.S." data-init="GV" data-contrato="CT-2026-0058" data-tipo="Persona jurídica">
+              <div class="q-avatar">GV</div>
+              <div class="q-main">
+                <div class="q-name">Grupo Vial S.A.S.</div>
+                <div class="q-sub">CT-2026-0058 · Persona jurídica · Aprobada por financiera</div>
+              </div>
+              <div class="q-wait"><b>2 días</b>en espera</div>
+              <svg class="q-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 id="finErpName">Documentos del ERP — Camila Restrepo</h2>
+              <div class="sub" id="finErpSub">CT-2026-0142 · Persona natural · Cuenta de cobro de agosto</div>
+            </div>
+            <button class="dp-btn" style="flex-shrink:0;">Descargar paquete de radicación</button>
+          </div>
+
+          <div class="divider-lbl">Checklist de documentos ERP <span class="count" id="finErpCount">3 de 5 cargados</span></div>
+          <ul class="checklist" id="finErpChecklist">
+            <li class="erp-item">
+              <span class="chk-icon ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="name">Certificado de causación</span>
+              <span class="tag ok">Cargado</span>
+              <button class="erp-upload-btn done">Ver</button>
+            </li>
+            <li class="erp-item">
+              <span class="chk-icon ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="name">Orden de pago</span>
+              <span class="tag ok">Cargado</span>
+              <button class="erp-upload-btn done">Ver</button>
+            </li>
+            <li class="erp-item">
+              <span class="chk-icon ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="name">Comprobante de retención / impuestos</span>
+              <span class="tag ok">Cargado</span>
+              <button class="erp-upload-btn done">Ver</button>
+            </li>
+            <li class="erp-item" data-pending="true">
+              <span class="chk-icon pending"></span>
+              <span class="name">Comprobante de egreso<span class="sub">Pendiente por cargar</span></span>
+              <span class="tag pending">Pendiente</span>
+              <button class="erp-upload-btn" onclick="uploadErpDoc(this)">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0-12 4 4m-4-4-4 4M4 17v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+                Subir
+              </button>
+            </li>
+            <li class="erp-item" data-pending="true">
+              <span class="chk-icon pending"></span>
+              <span class="name">Soporte de pago / consignación<span class="sub">Pendiente por cargar</span></span>
+              <span class="tag pending">Pendiente</span>
+              <button class="erp-upload-btn" onclick="uploadErpDoc(this)">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0-12 4 4m-4-4-4 4M4 17v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+                Subir
+              </button>
+            </li>
+          </ul>
+
+          <div class="help-note" style="margin:18px 0;">
+            <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.86 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.86a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <span>Estos 5 documentos son una lista provisional — ajústala con los nombres reales que use el equipo financiero cuando estén confirmados.</span>
+          </div>
+
+          <div class="wizard-nav">
+            <span class="hint" id="finErpHint" style="align-self:center;">Faltan 2 documentos por cargar.</span>
+            <button class="btn btn-lima" id="finErpCompleteBtn" disabled>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>
+              Marcar expediente como completo
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="side-stack">
+
+        <div class="card">
+          <div class="card-head"><h2>Datos del contrato</h2></div>
+          <div class="summary-row"><span class="k">Contratista</span><span class="v" id="finErpSumNombre">Camila Restrepo</span></div>
+          <div class="summary-row"><span class="k">Contrato</span><span class="v" id="finErpSumContrato">CT-2026-0142</span></div>
+          <div class="summary-row"><span class="k">Tipo</span><span class="v" id="finErpSumTipo">Persona natural</span></div>
+          <div class="summary-row"><span class="k">Valor mensual</span><span class="v">$4.200.000</span></div>
+          <div class="summary-row"><span class="k">Vigencia</span><span class="v">Ene — Dic 2026</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2>Historial de esta cuenta</h2></div>
+          <div class="notif"><span class="dot"></span><p>Adriana <b>aprobó</b> la revisión financiera y envió a causación.<br><span>Hace 1 día, 5:30 p.m.</span></p></div>
+          <div class="notif"><span class="dot"></span><p>María Elena <b>causó</b> el pago en el ERP de Valor+.<br><span>Hoy, 9:00 a.m.</span></p></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2>Notas del proceso</h2></div>
+          <div class="help-note">
+            <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+            <span>Estos documentos se generan en el ERP de Valor+ (fuera de este portal) — aquí solo se cargan como soporte del expediente.</span>
+          </div>
+          <div class="help-note" style="margin-top:12px;">
+            <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <span>Al cargar los 5 documentos, el expediente se marca automáticamente como <b>completo</b>.</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div><!-- /view-financiera -->
+
 </div>
 
 <script>
@@ -499,9 +906,9 @@
     btn.classList.toggle('on');
   }
 
-  document.querySelectorAll('.qrow').forEach(row => {
+  document.querySelectorAll('#queue .qrow').forEach(row => {
     row.addEventListener('click', () => {
-      document.querySelectorAll('.qrow').forEach(r => r.classList.remove('sel'));
+      document.querySelectorAll('#queue .qrow').forEach(r => r.classList.remove('sel'));
       row.classList.add('sel');
       const name = row.dataset.name;
       const contrato = row.dataset.contrato;
@@ -511,9 +918,91 @@
       document.getElementById('sumNombre').textContent = name;
       document.getElementById('sumContrato').textContent = contrato;
       document.getElementById('sumTipo').textContent = tipo;
+
+      const banner = document.getElementById('finBanner');
+      if (row.dataset.returned === 'financiera') {
+        document.getElementById('finBannerMotivo').textContent = row.dataset.motivo || '';
+        banner.classList.add('show');
+      } else {
+        banner.classList.remove('show');
+      }
+
       document.querySelector('.content .card:nth-of-type(2)') && document.querySelectorAll('.content > div:first-child .card')[1].scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
+
+  // ---- Pestañas de financiera ----
+  document.querySelectorAll('.tab-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.tab-pill').forEach(p => p.classList.remove('sel'));
+      pill.classList.add('sel');
+      const tab = pill.dataset.fintab;
+      document.getElementById('fintab-revision').style.display = (tab === 'revision') ? '' : 'none';
+      document.getElementById('fintab-erp').style.display = (tab === 'erp') ? '' : 'none';
+    });
+  });
+
+  // ---- Cola: Revisión financiera (Adriana) ----
+  document.querySelectorAll('#queueFinRev .qrow').forEach(row => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('#queueFinRev .qrow').forEach(r => r.classList.remove('sel'));
+      row.classList.add('sel');
+      const name = row.dataset.name, contrato = row.dataset.contrato, tipo = row.dataset.tipo;
+      document.getElementById('finRevName').textContent = 'Revisión financiera — ' + name;
+      document.getElementById('finRevSub').textContent = contrato + ' · ' + tipo + ' · Cuenta de cobro de agosto';
+      document.getElementById('finRevSumNombre').textContent = name;
+      document.getElementById('finRevSumContrato').textContent = contrato;
+      document.getElementById('finRevSumTipo').textContent = tipo;
+    });
+  });
+
+  // ---- Cola: Carga de documentos ERP (María Elena) ----
+  document.querySelectorAll('#queueFinErp .qrow').forEach(row => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('#queueFinErp .qrow').forEach(r => r.classList.remove('sel'));
+      row.classList.add('sel');
+      const name = row.dataset.name, contrato = row.dataset.contrato, tipo = row.dataset.tipo;
+      document.getElementById('finErpName').textContent = 'Documentos del ERP — ' + name;
+      document.getElementById('finErpSub').textContent = contrato + ' · ' + tipo + ' · Cuenta de cobro de agosto';
+      document.getElementById('finErpSumNombre').textContent = name;
+      document.getElementById('finErpSumContrato').textContent = contrato;
+      document.getElementById('finErpSumTipo').textContent = tipo;
+    });
+  });
+
+  // ---- Simular carga de documentos ERP ----
+  function uploadErpDoc(btn){
+    const li = btn.closest('.erp-item');
+    li.dataset.pending = 'false';
+    li.querySelector('.chk-icon').className = 'chk-icon ok';
+    li.querySelector('.chk-icon').innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>';
+    const nameSpan = li.querySelector('.name');
+    const sub = nameSpan.querySelector('.sub');
+    if (sub) sub.remove();
+    li.querySelector('.tag').className = 'tag ok';
+    li.querySelector('.tag').textContent = 'Cargado';
+    btn.className = 'erp-upload-btn done';
+    btn.textContent = 'Ver';
+    btn.removeAttribute('onclick');
+    updateErpProgress();
+  }
+
+  function updateErpProgress(){
+    const items = document.querySelectorAll('#finErpChecklist .erp-item');
+    const total = items.length;
+    const pending = document.querySelectorAll('#finErpChecklist .erp-item[data-pending="true"]').length;
+    const done = total - pending;
+    document.getElementById('finErpCount').textContent = done + ' de ' + total + ' cargados';
+    const hint = document.getElementById('finErpHint');
+    const btnComplete = document.getElementById('finErpCompleteBtn');
+    if (pending === 0) {
+      hint.textContent = 'Todos los documentos fueron cargados.';
+      btnComplete.disabled = false;
+    } else {
+      hint.textContent = 'Faltan ' + pending + ' documento' + (pending === 1 ? '' : 's') + ' por cargar.';
+      btnComplete.disabled = true;
+    }
+  }
 </script>
 
 <script>
@@ -523,9 +1012,10 @@
     const ROLE_MENUS = {
       admin: null, // null = ve todas las opciones
       supervisor: ['7_mis_contratistas_template.html','3_inscribir_contrato_template.html','5_expediente_template.html','6_aprobaciones_template.html'],
-      contratista: ['2_home_template.html','4_cargar_cuenta_cobro_template.html','5_expediente_template.html']
+      contratista: ['2_home_template.html','4_cargar_cuenta_cobro_template.html','5_expediente_template.html'],
+      financiera: ['6_aprobaciones_template.html','5_expediente_template.html']
     };
-    const ROLE_LABELS = { admin: 'Administrador', supervisor: 'Supervisor', contratista: 'Contratista' };
+    const ROLE_LABELS = { admin: 'Administrador', supervisor: 'Supervisor', contratista: 'Contratista', financiera: 'Financiera' };
 
     const role = new URLSearchParams(window.location.search).get('role');
 
@@ -538,6 +1028,23 @@
           const href = a.getAttribute('href');
           if (!href || !allowed.includes(href)) a.style.display = 'none';
         });
+      }
+
+      // Mostrar la vista correcta según el rol (esta página combina Aprobación 1 y Aprobación 2/3)
+      const viewSupervisor = document.getElementById('view-supervisor');
+      const viewFinanciera = document.getElementById('view-financiera');
+      if (viewSupervisor && viewFinanciera) {
+        if (role === 'financiera') {
+          viewSupervisor.style.display = 'none';
+          viewFinanciera.style.display = '';
+          const inst = document.querySelector('.brand .inst');
+          if (inst) inst.textContent = 'Portal de financiera';
+          const avatar = document.querySelector('.avatar');
+          if (avatar) avatar.textContent = 'AR';
+        } else {
+          viewSupervisor.style.display = '';
+          viewFinanciera.style.display = 'none';
+        }
       }
 
       // Insignia de rol + salir, junto al avatar/usuario
