@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="assets/css/estilos.css">
 <script>(function(){try{var d=document.documentElement,s=localStorage,t=s.getItem('vm.theme'),c=s.getItem('vm.contrast'),f=s.getItem('vm.fs'),m=s.getItem('vm.motion'),l=s.getItem('vm.links'),g=s.getItem('vm.font');if(t)d.dataset.theme=t;if(c)d.dataset.contrast=c;if(f)d.style.setProperty('--fs-scale',f);if(l)d.dataset.links=l;if(g)d.dataset.font=g;d.dataset.motion=m||(matchMedia('(prefers-reduced-motion: reduce)').matches?'reduce':'full');}catch(e){}})();</script>
 <script src="assets/js/app.js" defer></script>
+<link rel="modulepreload" href="assets/js/vendor/three.module.min.js">
+<script type="module" src="assets/js/tres.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
@@ -97,6 +99,7 @@
     <p class="lead">Como usuario registrado o anónimo, presenta peticiones, quejas, reclamos, denuncias o sugerencias por motivos de interés general o particular. Valor+ S.A.S., a través de la oficina de atención al ciudadano, atenderá tu solicitud.</p>
   </div>
   
+  <button type="button" class="icon-btn hero-pause" aria-pressed="false" aria-label="Pausar animación de fondo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
 </section>
 <section class="section tight"><div class="container">
   <nav class="chips" aria-label="Opciones de PQRSD"><a class="chip" href="#radicar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Radicar</a><a class="chip" href="#consultar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Consultar</a><a class="chip" href="#encuesta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg> Encuesta de satisfacción</a><a class="chip" href="https://s3-site-vmas-cdn.s3.amazonaws.com/wp-content/uploads/2024/10/31111216/Manual-de-Usuario-PQRDS.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Guía del usuario (PDF)</a></nav>

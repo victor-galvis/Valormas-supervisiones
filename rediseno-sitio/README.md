@@ -12,8 +12,8 @@ python3 -m http.server 8000
 # abrir http://localhost:8000
 ```
 
-También funciona abriendo `index.html` directamente en el navegador. La búsqueda y las transiciones entre
-páginas se ven mejor con el servidor local.
+También funciona abriendo `index.html` directamente en el navegador, pero **las escenas 3D necesitan un servidor**
+(el servidor local de arriba, Netlify o cualquier hosting). Sin servidor se ven las animaciones CSS y 2D de respaldo.
 
 ## Qué incluye (64 páginas)
 
@@ -48,6 +48,25 @@ páginas se ven mejor con el servidor local.
 - Transiciones entre páginas (View Transitions API).
 - Encabezado de vidrio que se oculta al bajar y reaparece al subir.
 - Barra de progreso de lectura.
+
+**Escenas 3D con Three.js** (`assets/js/tres.js`, Three.js r170 incluido en `assets/js/vendor/`, licencia MIT):
+- **Hero de inicio:**
+  - Núcleo con el "+" de la marca en 3D, burbuja de vidrio, icosaedro de malla y esfera de 3.600 partículas.
+  - Anillos orbitales con satélites de luz, los 6 servicios girando en órbita, nebulosas y campo de estrellas.
+  - Efecto *bloom* (brillo de neón).
+  - La cámara sigue al cursor y al hacer scroll la esfera explota y la cámara avanza.
+- **Cifras:** "mar de datos" de puntos ondulantes (shader propio) que forma ondas alrededor del cursor.
+- **Servicios:** 8.000 partículas que se transforman en una figura distinta para cada servicio, según el scroll: monedas (recaudo), globo de datos (automatización), estructura (proyectos), nudo (consultoría), candado (seguridad) y sol (energía).
+- **Clientes:** carrusel 3D en anillo con los logos; se puede arrastrar con el mouse o el dedo.
+- **Encabezados de todas las páginas internas:** constelación de poliedros flotantes con paralaje.
+- **Pie de página:** ola de partículas.
+
+**Rendimiento y accesibilidad del 3D:**
+- Las escenas solo se dibujan cuando están en pantalla y se detienen si la pestaña está oculta o el menú móvil abierto.
+- En celulares y equipos modestos se reduce la cantidad de partículas y se desactiva el *bloom*.
+- El botón de pausa (en cada encabezado) detiene todas las animaciones de fondo en todo el sitio y la preferencia se recuerda.
+- Con "reducir movimiento" las escenas quedan quietas.
+- Sin WebGL, o al abrir el sitio como archivo local, se usan las animaciones CSS y 2D.
 
 **Funciones nuevas:**
 - **Búsqueda global** con `Ctrl + K` o `/`: páginas, servicios, casos, 1.867 documentos de transparencia y procesos de contratación, con filtros y navegación por teclado.
@@ -109,6 +128,8 @@ rediseno-sitio/
 ├── assets/
 │   ├── css/estilos.css        tokens de marca, temas, componentes y animaciones
 │   ├── js/app.js              interacción y animación (sin dependencias)
+│   ├── js/tres.js             escenas 3D (Three.js)
+│   ├── js/vendor/             Three.js r170 y módulos de posprocesado (MIT)
 │   ├── js/indice-busqueda.js  índice de búsqueda (generado)
 │   └── img/                   logos, servicios, casos, equipo y clientes (WebP optimizado)
 └── _fuente/                   generador del sitio

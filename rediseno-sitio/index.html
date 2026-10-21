@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="assets/css/estilos.css">
 <script>(function(){try{var d=document.documentElement,s=localStorage,t=s.getItem('vm.theme'),c=s.getItem('vm.contrast'),f=s.getItem('vm.fs'),m=s.getItem('vm.motion'),l=s.getItem('vm.links'),g=s.getItem('vm.font');if(t)d.dataset.theme=t;if(c)d.dataset.contrast=c;if(f)d.style.setProperty('--fs-scale',f);if(l)d.dataset.links=l;if(g)d.dataset.font=g;d.dataset.motion=m||(matchMedia('(prefers-reduced-motion: reduce)').matches?'reduce':'full');}catch(e){}})();</script>
 <script src="assets/js/app.js" defer></script>
+<link rel="modulepreload" href="assets/js/vendor/three.module.min.js">
+<script type="module" src="assets/js/tres.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "GovernmentOrganization", "name": "Valor+ S.A.S.", "url": "https://valormas.gov.co/", "email": "recepcion@valormas.gov.co", "telephone": "+57 604 444 3747", "address": {"@type": "PostalAddress", "streetAddress": "Calle 41 N.° 52 – 28, Edificio Edatel, piso 3", "addressLocality": "Medellín", "addressRegion": "Antioquia", "addressCountry": "CO"}, "sameAs": ["https://www.facebook.com/ValorMasOficial/", "https://www.instagram.com/valormas/", "https://x.com/valormas", "https://co.linkedin.com/company/valormasoficial", "https://www.youtube.com/channel/UCZujESMNvxTBXYIGdxpMITw"]}</script>
 </head>
 <body>
@@ -122,7 +124,7 @@
   </div>
 </section>
 
-<section class="section soft" aria-labelledby="cifras-t">
+<section class="section dark" data-gl="olas" aria-labelledby="cifras-t">
   <div class="container">
     <p class="eyebrow">Impacto</p>
     <h2 id="cifras-t" data-reveal>Cifras destacadas</h2>

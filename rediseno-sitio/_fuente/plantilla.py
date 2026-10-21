@@ -44,6 +44,8 @@ def cabeza(r, titulo, desc, extra=''):
 <link rel="stylesheet" href="{r}assets/css/estilos.css">
 <script>{PREFS_JS}</script>
 <script src="{r}assets/js/app.js" defer></script>
+<link rel="modulepreload" href="{r}assets/js/vendor/three.module.min.js">
+<script type="module" src="{r}assets/js/tres.js"></script>
 {extra}</head>'''
 
 
@@ -267,6 +269,7 @@ def page_hero(r, titulo, migas, eyebrow=None, lead=None, img=None, meta=None, ex
     {le}{me}{extra}
   </div>
   {im}
+  <button type="button" class="icon-btn hero-pause" aria-pressed="false" aria-label="Pausar animación de fondo">{icon('pausa')}</button>
 </section>'''
 
 

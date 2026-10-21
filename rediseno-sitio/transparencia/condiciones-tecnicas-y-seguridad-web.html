@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="../assets/css/estilos.css">
 <script>(function(){try{var d=document.documentElement,s=localStorage,t=s.getItem('vm.theme'),c=s.getItem('vm.contrast'),f=s.getItem('vm.fs'),m=s.getItem('vm.motion'),l=s.getItem('vm.links'),g=s.getItem('vm.font');if(t)d.dataset.theme=t;if(c)d.dataset.contrast=c;if(f)d.style.setProperty('--fs-scale',f);if(l)d.dataset.links=l;if(g)d.dataset.font=g;d.dataset.motion=m||(matchMedia('(prefers-reduced-motion: reduce)').matches?'reduce':'full');}catch(e){}})();</script>
 <script src="../assets/js/app.js" defer></script>
+<link rel="modulepreload" href="../assets/js/vendor/three.module.min.js">
+<script type="module" src="../assets/js/tres.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
@@ -97,6 +99,7 @@
     <p class="lead">Políticas de seguridad digital e incidentes.</p><div class="page-meta"><span>4 documentos</span><span>Última actualización: 21 de octubre de 2026</span></div>
   </div>
   
+  <button type="button" class="icon-btn hero-pause" aria-pressed="false" aria-label="Pausar animación de fondo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
 </section>
 <section class="section tight"><div class="container t-layout">
   <aside class="t-nav" aria-label="Categorías de transparencia">

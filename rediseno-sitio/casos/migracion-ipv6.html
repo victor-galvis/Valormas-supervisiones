@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="../assets/css/estilos.css">
 <script>(function(){try{var d=document.documentElement,s=localStorage,t=s.getItem('vm.theme'),c=s.getItem('vm.contrast'),f=s.getItem('vm.fs'),m=s.getItem('vm.motion'),l=s.getItem('vm.links'),g=s.getItem('vm.font');if(t)d.dataset.theme=t;if(c)d.dataset.contrast=c;if(f)d.style.setProperty('--fs-scale',f);if(l)d.dataset.links=l;if(g)d.dataset.font=g;d.dataset.motion=m||(matchMedia('(prefers-reduced-motion: reduce)').matches?'reduce':'full');}catch(e){}})();</script>
 <script src="../assets/js/app.js" defer></script>
+<link rel="modulepreload" href="../assets/js/vendor/three.module.min.js">
+<script type="module" src="../assets/js/tres.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
@@ -97,6 +99,7 @@
     <p class="lead">La Gobernación de Antioquia, el Instituto para el Desarrollo de Antioquia (IDEA) e Indeportes Antioquia.</p><div class="btn-row" style="margin-top:1.5rem"><button type="button" class="btn light sm" data-share><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg> Compartir</button></div>
   </div>
   <img class="hero-img" src="../assets/img/casos/migracion-ipv6.webp" alt="" width="340" height="340" style="view-transition-name:caso-migracion-ipv6">
+  <button type="button" class="icon-btn hero-pause" aria-pressed="false" aria-label="Pausar animación de fondo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
 </section>
 <section class="section"><div class="container narrow"><div class="empty-note" style="font-size:1.05rem"><span class="pendiente">Contenido pendiente</span><p style="margin:.8em 0 0">En el sitio actual esta ficha solo tiene texto de relleno (“Lorem ipsum”).</p></div></div></section>
 <section class="section soft"><div class="container rail-wrap"><div class="rail-head"><h2>Otros casos relacionados</h2><div class="rail-controls"><button type="button" class="icon-btn" data-rail="prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" class="icon-btn" data-rail="next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div><div class="rail" tabindex="0" role="region" aria-label="Casos relacionados"><article class="card case-card hover spotlight" data-tags="soluciones-tecnologicas-y-consultoria-especializada">

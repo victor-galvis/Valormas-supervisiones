@@ -113,6 +113,7 @@
     if (!mm) return;
     mm.classList.toggle('is-open', v);
     mm.toggleAttribute('inert', !v);
+    v ? doc.dataset.overlay = 'menu' : delete doc.dataset.overlay; // tres.js deja de renderizar detrás del menú
     mmBtn?.setAttribute('aria-expanded', v);
     document.body.style.overflow = v ? 'hidden' : '';
     if (v) setTimeout(() => $('.mm-close', mm)?.focus(), 60); else mmBtn?.focus();
@@ -121,8 +122,8 @@
     mm.setAttribute('inert', '');
     mmBtn?.addEventListener('click', () => setMobile(true));
     $('.mm-close', mm)?.addEventListener('click', () => setMobile(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && mm.classList.contains('is-open')) setMobile(false); });
     mm.addEventListener('keydown', e => {
-      if (e.key === 'Escape') setMobile(false);
       if (e.key === 'Tab') { // atrapar el foco dentro del menú
         const f = $$('a, button', mm).filter(el => el.offsetParent !== null);
         if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f.at(-1).focus(); }
@@ -280,11 +281,28 @@
     });
   });
 
-  /* ---------- Red de partículas del hero ---------- */
+  /* ---------- Pausa global de animaciones de fondo (WCAG 2.2.2) ----------
+     Los botones .hero-pause detienen auroras, la red 2D y las escenas 3D (tres.js). */
+  const ICON_PAUSA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  const paused = () => doc.dataset.paused === 'true';
+  function setPaused(v) {
+    v ? doc.dataset.paused = 'true' : delete doc.dataset.paused;
+    store.set('paused', v ? '1' : null);
+    $$('.hero-pause').forEach(btn => {
+      btn.setAttribute('aria-pressed', v);
+      btn.setAttribute('aria-label', v ? 'Reanudar animación de fondo' : 'Pausar animación de fondo');
+      btn.innerHTML = v ? ICON_PLAY : ICON_PAUSA;
+    });
+    document.dispatchEvent(new CustomEvent('vm:pausa', { detail: v }));
+  }
+  $$('.hero-pause').forEach(btn => btn.addEventListener('click', () => setPaused(!paused())));
+  setPaused(store.get('paused') === '1');
+
+  /* ---------- Red de partículas 2D del hero (respaldo si no hay WebGL) ---------- */
   $$('canvas.net').forEach(cv => {
     const ctx = cv.getContext('2d');
-    const btn = cv.parentElement.querySelector('.hero-pause');
-    let w, h, dpr, pts = [], raf = 0, running = true, visible = true;
+    let w, h, dpr, pts = [], raf = 0, visible = true;
     const mouse = { x: -9999, y: -9999 };
     const colors = ['#00c26a', '#00a3e0', '#4f9dff', '#b8d430'];
     function init() {
@@ -294,12 +312,13 @@
       const n = Math.round(clamp(w * h / 14000, 30, 110));
       pts = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35, r: Math.random() * 1.8 + .8, c: colors[Math.random() * colors.length | 0] }));
     }
+    const moving = () => !paused() && !reduced() && !cv.dataset.off;
     function draw() {
       ctx.clearRect(0, 0, w, h);
       const link = Math.min(150, w / 7);
       for (let i = 0; i < pts.length; i++) {
         const p = pts[i];
-        if (running && !reduced()) {
+        if (moving()) {
           p.x += p.vx; p.y += p.vy;
           const dx = mouse.x - p.x, dy = mouse.y - p.y, d = Math.hypot(dx, dy);
           if (d < 180) { p.x -= dx / d * .6; p.y -= dy / d * .6; }
@@ -313,25 +332,16 @@
         ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
       }
     }
-    function loop() { draw(); raf = (running && visible && !reduced()) ? requestAnimationFrame(loop) : 0; }
+    function loop() { if (cv.dataset.off) { raf = 0; return; } draw(); raf = (visible && moving()) ? requestAnimationFrame(loop) : 0; }
     function start() { if (!raf) loop(); }
+    // tres.js llama a esto cuando la escena 3D toma el control
+    cv.__stop = () => { cv.dataset.off = '1'; cancelAnimationFrame(raf); raf = 0; };
     init(); loop();
-    addEventListener('resize', () => { init(); draw(); });
+    addEventListener('resize', () => { if (!cv.dataset.off) { init(); draw(); } });
     cv.parentElement.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
     cv.parentElement.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); }).observe(cv);
-    function setRunning(v) {
-      running = v;
-      if (btn) {
-        btn.setAttribute('aria-pressed', !v);
-        btn.setAttribute('aria-label', v ? 'Pausar animación de fondo' : 'Reanudar animación de fondo');
-        btn.innerHTML = v ? '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>' : '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-      }
-      $$('.aurora span', cv.parentElement).forEach(s => s.style.animationPlayState = v ? '' : 'paused');
-      start();
-    }
-    btn?.addEventListener('click', () => setRunning(!running));
-    if (reduced()) setRunning(false);
+    document.addEventListener('vm:pausa', start);
   });
 
   /* ---------- Inclinación 3D, brillo y botones magnéticos ---------- */
