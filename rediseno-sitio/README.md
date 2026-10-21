@@ -49,21 +49,28 @@ También funciona abriendo `index.html` directamente en el navegador, pero **las
 - Encabezado de vidrio que se oculta al bajar y reaparece al subir.
 - Barra de progreso de lectura.
 
-**Escenas 3D con Three.js** (`assets/js/tres.js`, Three.js r170 incluido en `assets/js/vendor/`, licencia MIT):
-- **Hero de inicio:**
-  - Núcleo con el "+" de la marca en 3D, burbuja de vidrio, icosaedro de malla y esfera de 3.600 partículas.
-  - Anillos orbitales con satélites de luz, los 6 servicios girando en órbita, nebulosas y campo de estrellas.
-  - Efecto *bloom* (brillo de neón).
-  - La cámara sigue al cursor y al hacer scroll la esfera explota y la cámara avanza.
-- **Cifras:** "mar de datos" de puntos ondulantes (shader propio) que forma ondas alrededor del cursor.
-- **Servicios:** 8.000 partículas que se transforman en una figura distinta para cada servicio, según el scroll: monedas (recaudo), globo de datos (automatización), estructura (proyectos), nudo (consultoría), candado (seguridad) y sol (energía).
-- **Clientes:** carrusel 3D en anillo con los logos; se puede arrastrar con el mouse o el dedo.
-- **Encabezados de todas las páginas internas:** constelación de poliedros flotantes con paralaje.
-- **Pie de página:** ola de partículas.
+**Dos versiones del prototipo:**
+
+| Versión | Qué incluye |
+|---|---|
+| **Clásica** | Todas las animaciones CSS y 2D anteriores |
+| **3D corporativa** | Lo mismo, más las escenas Three.js de `assets/js/tres.js` (Three.js r170 incluido en `assets/js/vendor/`, licencia MIT) |
+
+La versión 3D sigue la línea gráfica de valormas.gov.co:
+- Verdes institucionales, lima del "+", azul marino y blanco.
+- Objetos sólidos y mates con iluminación de estudio, como un render de producto.
+- Sin brillos neón ni mezcla aditiva.
+
+Escenas de la versión 3D:
+- **Hero de inicio:** el "+" de la marca en 3D, con anillos institucionales y medallones de los servicios en órbita.
+- **Servicios:** un objeto 3D por servicio sobre un pedestal blanco, que cambia al hacer scroll: pila de monedas (recaudo), globo de datos (automatización), gráfico de barras (proyectos), servidores (consultoría), candado (seguridad) y panel solar con sol (energía).
+- **Cifras y pie de página:** malla de puntos verde que ondula suavemente y reacciona al cursor.
+- **Clientes:** carrusel 3D en anillo con los logos; se puede arrastrar.
+- **Encabezados internos:** signos "+" de la marca flotando.
 
 **Rendimiento y accesibilidad del 3D:**
 - Las escenas solo se dibujan cuando están en pantalla y se detienen si la pestaña está oculta o el menú móvil abierto.
-- En celulares y equipos modestos se reduce la cantidad de partículas y se desactiva el *bloom*.
+- En celulares y equipos modestos se reduce la cantidad de puntos; en el celular el hero muestra la versión 2D.
 - El botón de pausa (en cada encabezado) detiene todas las animaciones de fondo en todo el sitio y la preferencia se recuerda.
 - Con "reducir movimiento" las escenas quedan quietas.
 - Sin WebGL, o al abrir el sitio como archivo local, se usan las animaciones CSS y 2D.
@@ -128,12 +135,13 @@ rediseno-sitio/
 ├── assets/
 │   ├── css/estilos.css        tokens de marca, temas, componentes y animaciones
 │   ├── js/app.js              interacción y animación (sin dependencias)
-│   ├── js/tres.js             escenas 3D (Three.js)
-│   ├── js/vendor/             Three.js r170 y módulos de posprocesado (MIT)
+│   ├── js/tres.js             escenas 3D corporativas (Three.js)
+│   ├── js/vendor/             Three.js r170 (MIT)
 │   ├── js/indice-busqueda.js  índice de búsqueda (generado)
 │   └── img/                   logos, servicios, casos, equipo y clientes (WebP optimizado)
 └── _fuente/                   generador del sitio
     ├── construir.py           páginas
+    ├── empaquetar.py          ZIP de las versiones clásica y 3D
     ├── plantilla.py           encabezado, menú, pie y diálogos
     ├── contenido.py           lectura del contenido extraído
     ├── componentes.py         íconos, textos y datos de la entidad
@@ -144,6 +152,12 @@ Para regenerar las páginas después de editar el contenido o las plantillas:
 
 ```bash
 python3 _fuente/construir.py
+```
+
+Para generar los ZIP de las dos versiones (quedan en `dist/`, listos para arrastrar a Netlify):
+
+```bash
+python3 _fuente/empaquetar.py
 ```
 
 Solo requiere Python 3.8 o superior, sin dependencias.

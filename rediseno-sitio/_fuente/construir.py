@@ -210,7 +210,7 @@ def pagina_inicio():
   </div>
 </section>
 
-<section class="section dark" data-gl="olas" aria-labelledby="cifras-t">
+<section class="section soft" data-gl="olas" aria-labelledby="cifras-t">
   <div class="container">
     <p class="eyebrow">Impacto</p>
     <h2 id="cifras-t" data-reveal>Cifras destacadas</h2>
