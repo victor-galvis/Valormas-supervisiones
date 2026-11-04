@@ -223,7 +223,8 @@ def panel_mapa(id_, modo, titulo='Explora el mapa'):
 </div>'''
 
 
-CONTROL_3D = f'''<div class="control-3d" role="group" aria-label="Controles del mapa 3D"><button type="button" class="icono-btn" data-zoom="mas" aria-label="Acercar el mapa">{ico('mas')}</button><button type="button" class="icono-btn" data-zoom="menos" aria-label="Alejar el mapa">{ico('menos')}</button><button type="button" class="icono-btn" data-zoom="centro" aria-label="Volver a la vista general">{ico('centro')}</button></div>
+AVISO_3D = '<p class="aviso-3d" role="status">Cargando la escena 3D…</p>'
+CONTROL_3D = AVISO_3D + f'''<div class="control-3d" role="group" aria-label="Controles del mapa 3D"><button type="button" class="icono-btn" data-zoom="mas" aria-label="Acercar el mapa">{ico('mas')}</button><button type="button" class="icono-btn" data-zoom="menos" aria-label="Alejar el mapa">{ico('menos')}</button><button type="button" class="icono-btn" data-zoom="centro" aria-label="Volver a la vista general">{ico('centro')}</button></div>
 <p class="ayuda-3d" aria-hidden="true">{ico('mano')} Arrastra para girar · Rueda o pellizco para acercar</p>'''
 NOTA_DATOS = 'Totales de referencia de las fichas de proyecto; la distribución por municipio es ilustrativa para el prototipo.'
 
@@ -359,7 +360,7 @@ def conectividad():
   </div>
 </section>
 <section class="relato" id="relato-antena" aria-label="Recorrido 3D del proyecto">
-  <div class="relato-escena" id="escena-antena"><p class="ayuda-3d" aria-hidden="true">{ico('mano')} Arrastra para mirar alrededor</p></div>
+  <div class="relato-escena" id="escena-antena">{AVISO_3D}<p class="ayuda-3d" aria-hidden="true">{ico('mano')} Arrastra para mirar alrededor</p></div>
   <div class="relato-pasos">{pasos_html}</div>
 </section>
 <section class="seccion marino" aria-labelledby="mapa-t">
@@ -444,7 +445,7 @@ def seguridad():
     <h2 id="cam-t" data-aparece>Conoce las cámaras de la red</h2>
     <p class="entrada" data-aparece>Gira cada equipo, acércate y mira su campo de visión. También puedes elegir un tipo de cámara en la gráfica.</p>
     <div class="visor" style="margin-top:28px">
-      <div class="visor-escena" id="visor-camaras"></div>
+      <div class="visor-escena" id="visor-camaras">{AVISO_3D}</div>
       <div class="visor-info">
         <div class="tabs" role="tablist" aria-label="Tipos de cámara" id="tabs-camaras">{tabs}</div>
         {panes}

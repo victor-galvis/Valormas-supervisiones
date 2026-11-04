@@ -346,3 +346,6 @@ dialog.a11y .cuerpo { padding: 18px 20px 22px; display: grid; gap: 14px; }
 :root[data-contraste="alto"] .panel-mapa { background: #000; border-color: #fff; }
 .dona text { pointer-events: none; }
 @media (max-width: 999px) { .hero .contenedor { order: 1; } .hero-escena { order: 2; } .control-3d { right: 16px; } }
+.aviso-3d { position: absolute; z-index: 3; left: 50%; top: 50%; translate: -50% -50%; margin: 0; max-width: min(420px, 86%); text-align: center; color: #c9d4e6; font-size: .95rem; padding: 14px 18px; border-radius: 14px; background: rgba(15,26,48,.6); }
+.visor-escena .aviso-3d { color: var(--marino); background: rgba(255,255,255,.85); }
+.aviso-3d.error { border: 1px solid var(--lima); }

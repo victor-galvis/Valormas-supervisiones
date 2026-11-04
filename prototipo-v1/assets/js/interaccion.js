@@ -43,12 +43,24 @@ function pintarFicha(ficha, { m, con, seg }, modo = 'todos') {
   anunciar(`${m.n}: ${ficha.querySelector('dl').textContent.replace(/\s+/g, ' ')}`);
 }
 
+window.VM3D = 'iniciado';
+// Aviso visible dentro de cada escena: desaparece al cargar o explica el problema
+function aviso(host, texto) {
+  const a = host && host.querySelector('.aviso-3d');
+  if (!a) return;
+  if (texto) { a.textContent = texto; a.classList.add('error'); } else a.hidden = true;
+}
+function protegido(host, fn) {
+  try { const r = fn(); aviso(host); return r; }
+  catch (e) { console.error(e); aviso(host, 'No se pudo cargar la escena 3D (' + e.message + '). La información está disponible en las gráficas y tablas de esta página.'); return null; }
+}
 function montarMapa(escenaHost, panel, modo) {
-  if (!webglDisponible() || location.protocol === 'file:') {
-    escenaHost.innerHTML = '<p class="nota" style="color:#c9d4e6;padding:24px">El mapa 3D necesita un navegador con WebGL y abrir el sitio desde un servidor. Consulta los datos en la tabla de esta página.</p>';
+  if (!webglDisponible()) {
+    aviso(escenaHost, 'Tu navegador no tiene WebGL activo, por eso no se muestra el mapa 3D. La información está en las gráficas y tablas de esta página.');
     return null;
   }
-  const mapa = crearMapa(escenaHost, { capa: modo === 'inicio' ? 'todos' : modo, arcosEnTodos: false, distancia: modo === 'inicio' ? 56 : 70 });
+  const mapa = protegido(escenaHost, () => crearMapa(escenaHost, { capa: modo === 'inicio' ? 'todos' : modo, arcosEnTodos: false, distancia: modo === 'inicio' ? 56 : 70 }));
+  if (!mapa) return null;
   const ficha = panel && $('.ficha-mpio', panel);
   let capaVista = modo === 'inicio' ? 'todos' : modo;
   escenaHost.addEventListener('vm:municipio', e => { if (ficha) pintarFicha(ficha, e.detail, capaVista); });
@@ -78,29 +90,30 @@ if (heroMapa) montarMapa(heroMapa, $('#panel-mapa'), pagina === 'inicio' ? 'inic
 const mapaSec = $('#mapa-seccion');
 if (mapaSec) montarMapa(mapaSec, $('#panel-seccion'), mapaSec.dataset.capa);
 
-if (pagina === 'conectividad' && webglDisponible() && location.protocol !== 'file:') {
+if (pagina === 'conectividad' && webglDisponible()) {
   const { crearEscenaAntena } = await import('./antena3d.js');
-  crearEscenaAntena($('#escena-antena'), $$('#relato-antena .paso'));
+  protegido($('#escena-antena'), () => crearEscenaAntena($('#escena-antena'), $$('#relato-antena .paso')));
 }
 
-if (pagina === 'seguridad' && webglDisponible() && location.protocol !== 'file:') {
+if (pagina === 'seguridad' && webglDisponible()) {
   // relato: mapa de la red con focos por paso
   const host = $('#escena-red');
-  const red = crearMapa(host, { capa: 'seguridad', autoRotar: true, distancia: 64 });
+  const red = protegido(host, () => crearMapa(host, { capa: 'seguridad', autoRotar: true, distancia: 64 }));
   const focos = [null, DATOS.seguridad.nodos[0].c, DATOS.seguridad.nodos[1].c, null];
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     const i = +e.target.dataset.paso;
     $$('#relato-red .paso').forEach((p, j) => p.classList.toggle('activo', i === j));
+    if (!red) return;
     red.enfocar(focos[i], i === 1 ? 26 : 34);
     if (focos[i]) red.seleccionar(focos[i]);
   }), { rootMargin: '-45% 0px -45% 0px' });
   $$('#relato-red .paso').forEach(p => io.observe(p));
   // visor de cámaras sincronizado con pestañas y dona
   const { crearVisor } = await import('./camaras3d.js');
-  const visor = crearVisor($('#visor-camaras'));
+  const visor = protegido($('#visor-camaras'), () => crearVisor($('#visor-camaras')));
   const lista = $('#tabs-camaras'), dona = $('#grafica-camaras');
-  lista?.addEventListener('vm:tab', e => { visor.mostrar(e.detail); });
+  lista?.addEventListener('vm:tab', e => { visor?.mostrar(e.detail); });
   dona?.addEventListener('vm:segmento', e => { lista.__elegir?.(e.detail); });
 }
 

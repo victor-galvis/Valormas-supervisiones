@@ -220,4 +220,15 @@
   });
 
   document.querySelectorAll('[data-anio]').forEach(n => { n.textContent = new Date().getFullYear(); });
+
+  /* ---------- Diagnóstico de las escenas 3D ----------
+     Si el módulo 3D no arranca (por ejemplo, al abrir el archivo con doble clic),
+     el aviso de cada escena explica qué pasó en lugar de dejar el espacio vacío. */
+  setTimeout(() => {
+    if (window.VM3D) return;
+    const msg = location.protocol === 'file:'
+      ? 'El 3D no carga al abrir el archivo directamente. Ábrelo desde un servidor: el enlace de Netlify o «python3 -m http.server» en la carpeta del sitio.'
+      : 'No se pudo cargar la escena 3D en este navegador. Actualiza la página (Ctrl + Shift + R) o prueba con Chrome, Edge o Firefox actualizados.';
+    $$('.aviso-3d').forEach(a => { a.textContent = msg; a.classList.add('error'); });
+  }, 6000);
 })();
