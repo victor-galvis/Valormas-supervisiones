@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tecnología que llega a cada territorio | Valor+</title>
+<meta name="description" content="Valor+ integra conectividad, seguridad, datos y energía para las entidades públicas de Antioquia.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1c2d4c">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/css/app.css">
+<script>(function(){try{var d=document.documentElement,s=localStorage,e=s.getItem('v1.escala'),c=s.getItem('v1.contraste'),m=s.getItem('v1.movimiento');if(e)d.style.setProperty('--escala',e);if(c)d.dataset.contraste='alto';d.dataset.movimiento=m||(matchMedia('(prefers-reduced-motion: reduce)').matches?'no':'si');}catch(x){}})();</script>
+<script src="assets/js/base.js" defer></script>
+<link rel="modulepreload" href="assets/js/vendor/three.module.min.js">
+<script type="module" src="assets/js/interaccion.js"></script>
+</head>
+<body data-pagina="inicio">
+<a class="saltar" href="#contenido">Saltar al contenido principal</a>
+<div class="govco" role="region" aria-label="Barra del portal GOV.CO"><div class="contenedor"><a href="https://www.gov.co/" target="_blank" rel="noopener"><img src="assets/img/govco.svg" alt="GOV.CO, portal del Estado colombiano (abre en una pestaña nueva)" width="101" height="22"></a></div></div>
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="index.html" aria-label="Valor+, ir al inicio"><img class="pos" src="assets/img/logo.svg" alt="" width="180" height="32"><img class="neg" src="assets/img/logo-blanco.svg" alt="" width="180" height="32"></a>
+    <nav class="menu" aria-label="Menú principal"><ul><li><a href="index.html" aria-current="page">Inicio</a></li><li><a href="index.html#nosotros">Nosotros</a></li><li><a href="index.html#servicios">Servicios</a></li><li><a href="index.html#proyectos">Proyectos</a></li><li><a href="transparencia.html">Transparencia</a></li><li><a href="atencion-ciudadania.html">Atención a la ciudadanía</a></li><li><a href="participa.html">Participa</a></li></ul></nav>
+    <div class="acciones">
+      <button class="icono-btn" type="button" data-abrir-a11y aria-haspopup="dialog" aria-label="Opciones de accesibilidad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5c2.3.7 4.6 1 7 1s4.7-.3 7-1M12 9.5v4.5M12 14l-3 6.5M12 14l3 6.5"/></svg></button>
+      <a class="boton lima mini" href="atencion-ciudadania.html#pqrsd">PQRSD</a>
+      <button class="icono-btn btn-menu" type="button" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="menu-movil" id="menu-movil" role="dialog" aria-modal="true" aria-label="Menú">
+  <button class="icono-btn cerrar" type="button" aria-label="Cerrar menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <nav aria-label="Menú principal (móvil)"><ul><li><a href="index.html">Inicio</a></li><li><a href="index.html#nosotros">Nosotros</a></li><li><a href="index.html#servicios">Servicios</a></li><li><a href="index.html#proyectos">Proyectos</a></li><li><a href="transparencia.html">Transparencia</a></li><li><a href="atencion-ciudadania.html">Atención a la ciudadanía</a></li><li><a href="participa.html">Participa</a></li><li><a href="atencion-ciudadania.html#pqrsd">Radicar una PQRSD</a></li></ul></nav>
+</div>
+<main id="contenido" tabindex="-1">
+
+<section class="hero" aria-labelledby="hero-t">
+  <div class="hero-trama" aria-hidden="true"></div>
+  <div class="hero-escena" id="mapa-hero"><div class="control-3d" role="group" aria-label="Controles del mapa 3D"><button type="button" class="icono-btn" data-zoom="mas" aria-label="Acercar el mapa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button><button type="button" class="icono-btn" data-zoom="menos" aria-label="Alejar el mapa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/></svg></button><button type="button" class="icono-btn" data-zoom="centro" aria-label="Volver a la vista general"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button></div>
+<p class="ayuda-3d" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4.5a1.5 1.5 0 0 1 3 0V12M14 11.5V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3 14.5a1.5 1.5 0 0 1 2.4-1.8L8 15"/></svg> Arrastra para girar · Rueda o pellizco para acercar</p></div>
+  <div class="contenedor">
+    <div>
+      <p class="antetitulo">Valor+ · Antioquia</p>
+      <h1 id="hero-t">Tecnología que <em>llega</em> a cada territorio</h1>
+      <p class="entrada">Integramos conectividad, seguridad, datos y energía para que las entidades públicas de Antioquia presten mejores servicios a la ciudadanía.</p>
+      <div class="botones"><a class="boton lima" href="#proyectos">Explorar proyectos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="boton borde" href="atencion-ciudadania.html">Atención a la ciudadanía</a></div>
+      <div class="panel-mapa" id="panel-mapa">
+  <div><label id="capa-t">Capa</label><div class="chips" role="group" aria-labelledby="capa-t" style="margin-top:8px">
+      <button type="button" class="chip" data-capa="todos" aria-pressed="true">Subregiones</button>
+      <button type="button" class="chip" data-capa="conectividad" aria-pressed="false"><span class="punto" style="background:#b5c73a"></span>Conectividad</button>
+      <button type="button" class="chip" data-capa="seguridad" aria-pressed="false"><span class="punto" style="background:#d8effb"></span>Seguridad</button></div></div>
+  <div><label for="panel-mapa-q">Busca tu municipio</label>
+    <div class="buscador" style="margin-top:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="panel-mapa-q" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="panel-mapa-lista" placeholder="Ej.: Urrao, Yarumal, Turbo" autocomplete="off"><ul class="sugerencias" id="panel-mapa-lista" role="listbox" hidden></ul></div></div>
+  <div class="ficha-mpio" aria-live="polite"><p class="sub" style="margin:0">Selecciona un municipio en el mapa o búscalo por su nombre.</p></div>
+  <div class="leyenda"><span><i style="background:#b5c73a"></i>Sedes conectadas</span><span><i style="background:#d8effb"></i>Cámaras integradas</span></div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion celeste" aria-labelledby="cifras-t">
+  <div class="contenedor">
+    <p class="antetitulo">Impacto</p>
+    <h2 id="cifras-t" data-aparece>Resultados que se ven en el territorio</h2>
+    <div class="cifras" style="margin-top:32px" data-aparece>
+      <div class="cifra"><p class="n"><span data-cuenta="870">870</span></p><p>sedes educativas rurales con internet confirmado</p></div>
+      <div class="cifra"><p class="n">+<span data-cuenta="900">900</span></p><p>cámaras integradas al nodo departamental de seguridad</p></div>
+      <div class="cifra"><p class="n"><span data-cuenta="48">48</span></p><p>municipios conectados a la red de seguridad</p></div>
+      <div class="cifra"><p class="n"><span data-cuenta="9">9</span></p><p>subregiones de Antioquia con presencia de Valor+</p></div>
+    </div>
+    <p class="nota" style="margin-top:14px">Cifras de referencia de las fichas de proyecto.</p>
+  </div>
+</section>
+
+<section class="seccion" id="servicios" aria-labelledby="serv-t">
+  <div class="contenedor">
+    <p class="antetitulo">Servicios</p>
+    <h2 id="serv-t" data-aparece>Seis líneas para transformar la gestión pública</h2>
+    <div class="grid g3" style="margin-top:36px"><a class="servicio" href="#" data-aparece style="--d:0"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="10" y="30" width="44" height="26" rx="5" fill="#d8effb"/><circle cx="32" cy="22" r="13" fill="#b5c73a"/><path d="M32 15v14M28 18.5c0-1.6 1.8-2.6 4-2.6s4 1 4 2.6-1.8 2.4-4 2.6-4 1-4 2.6 1.8 2.6 4 2.6 4-1 4-2.6" stroke="#1c2d4c" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M18 42h28M18 48h18" stroke="#1c2d4c" stroke-width="3" stroke-linecap="round"/></svg><h3>Estrategias tecnológicas del recaudo</h3><p>Plataformas y operación para que las rentas públicas se liquiden, cobren y recauden de forma ágil y transparente.</p><span class="mas">Conocer más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="servicio" href="#" data-aparece style="--d:70"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><ellipse cx="32" cy="16" rx="20" ry="7" fill="#b5c73a"/><path d="M12 16v30c0 4 9 7 20 7s20-3 20-7V16" fill="#d8effb"/><path d="M12 31c0 4 9 7 20 7s20-3 20-7" stroke="#1c2d4c" stroke-width="2.5" fill="none"/><path d="M12 16v30c0 4 9 7 20 7s20-3 20-7V16" stroke="#1c2d4c" stroke-width="2.5" fill="none"/></svg><h3>Automatización de la información</h3><p>Datos del territorio convertidos en decisiones: catastro multipropósito, gestión documental y telegestión.</p><span class="mas">Conocer más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="servicio" href="proyectos/conectividad-satelital.html" data-aparece style="--d:140"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="38" width="10" height="18" rx="2" fill="#d8effb"/><rect x="24" y="28" width="10" height="28" rx="2" fill="#d8effb"/><rect x="40" y="14" width="10" height="42" rx="2" fill="#b5c73a"/><path d="M8 26 24 18l10 4 18-14" stroke="#1c2d4c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M45 8h7v7" stroke="#1c2d4c" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3>Estructuración y gerenciamiento de proyectos</h3><p>Llevamos los proyectos de la idea a la operación, con gerencia técnica, financiera y de calidad.</p><span class="mas">Ver proyecto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="servicio" href="#" data-aparece style="--d:210"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="10" width="48" height="32" rx="5" fill="#d8effb"/><path d="M8 34h48" stroke="#1c2d4c" stroke-width="2.5"/><path d="M24 54h16M32 42v12" stroke="#1c2d4c" stroke-width="3" stroke-linecap="round"/><path d="m24 20-6 5 6 5M40 20l6 5-6 5" stroke="#1c2d4c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="25" r="3.5" fill="#b5c73a"/></svg><h3>Soluciones tecnológicas y consultoría</h3><p>Mesa de servicios, nube, ciberseguridad, licenciamiento y especialistas para la operación digital del Estado.</p><span class="mas">Conocer más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="servicio" href="proyectos/seguridad-ciudadana.html" data-aparece style="--d:280"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6 54 14v14c0 14-9 24-22 30C19 52 10 42 10 28V14z" fill="#d8effb"/><path d="M32 6 54 14v14c0 14-9 24-22 30C19 52 10 42 10 28V14z" stroke="#1c2d4c" stroke-width="2.5" fill="none"/><rect x="22" y="22" width="20" height="12" rx="3" fill="#1c2d4c"/><circle cx="36" cy="28" r="3.5" fill="#b5c73a"/><path d="M26 34l-3 8" stroke="#1c2d4c" stroke-width="3" stroke-linecap="round"/></svg><h3>Seguridad</h3><p>Centros de monitoreo, videovigilancia y control de acceso integrados para municipios más seguros.</p><span class="mas">Ver proyecto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="servicio" href="#" data-aparece style="--d:350"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle cx="22" cy="20" r="9" fill="#b5c73a"/><path d="M22 4v4M22 32v4M6 20h4M34 20h4M10.7 8.7l2.8 2.8M30.5 28.5l2.8 2.8M10.7 31.3l2.8-2.8" stroke="#1c2d4c" stroke-width="2.5" stroke-linecap="round"/><path d="M24 56h32l-6-22H18z" fill="#d8effb"/><path d="M24 56h32l-6-22H18zM21 45h33M34 34l3 22" stroke="#1c2d4c" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg><h3>Energía en tecnologías limpias</h3><p>Alumbrado eficiente y soluciones fotovoltaicas que reducen costos y emisiones.</p><span class="mas">Conocer más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+  </div>
+</section>
+
+<section class="seccion marino" id="proyectos" aria-labelledby="proy-t">
+  <div class="contenedor">
+    <p class="antetitulo">Proyectos</p>
+    <h2 id="proy-t" data-aparece>Explora nuestros proyectos en 3D</h2>
+    <p class="entrada" data-aparece>Recorre cómo llega internet satelital a una escuela rural y cómo funciona la red departamental de cámaras de seguridad.</p>
+    <div class="grid g2" style="margin-top:36px">
+      <a class="proyecto" href="proyectos/conectividad-satelital.html" data-aparece><div class="arte"><svg viewBox="0 0 600 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+<defs><linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f1a30"/><stop offset="1" stop-color="#263b63"/></linearGradient></defs>
+<rect width="600" height="460" fill="url(#cielo)"/>
+<g fill="#d8effb" opacity=".6"><circle cx="60" cy="50" r="1.5"/><circle cx="180" cy="90" r="1.2"/><circle cx="300" cy="40" r="1.6"/><circle cx="420" cy="110" r="1.2"/><circle cx="540" cy="60" r="1.5"/><circle cx="250" cy="150" r="1"/><circle cx="500" cy="170" r="1"/></g>
+<g class="flota"><rect x="430" y="58" width="44" height="14" rx="3" fill="#e9edf1"/><rect x="474" y="61" width="70" height="8" fill="#3b4f78"/><rect x="360" y="61" width="70" height="8" fill="#3b4f78"/><circle cx="436" cy="65" r="3" fill="#b5c73a"/></g>
+<path d="M452 76 300 300" stroke="#b5c73a" stroke-width="3" stroke-dasharray="10 8"/>
+<path d="M0 330 120 240 210 300 320 210 430 290 520 230 600 280V460H0z" fill="#2a6a3f"/>
+<path d="M0 380 90 330 200 370 300 320 420 370 520 330 600 360V460H0z" fill="#194a2b"/>
+<g transform="translate(250 300)"><rect x="0" y="20" width="110" height="46" fill="#f4f7f5"/><path d="M-8 22 55-8l63 30z" fill="#194a2b"/><rect x="18" y="38" width="16" height="28" fill="#1c2d4c"/><rect x="48" y="34" width="22" height="14" fill="#d8effb"/><rect x="78" y="34" width="22" height="14" fill="#d8effb"/>
+<path d="M80 -4v-18" stroke="#c9d0d8" stroke-width="3"/><rect x="62" y="-40" width="40" height="22" rx="4" fill="#fff" transform="rotate(-25 82 -29)"/></g>
+<g fill="none" stroke="#b5c73a" stroke-width="3" opacity=".8"><path d="M335 395a30 30 0 0 1 40 0"/><path d="M325 383a46 46 0 0 1 60 0"/></g>
+</svg></div><div class="texto"><span class="etiqueta">Estructuración y gerenciamiento de proyectos</span><h3>Conectividad satelital para la ruralidad</h3><p>Antenas de órbita baja que conectan sedes educativas donde la fibra no llega.</p><span class="ir">Ver la experiencia 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a>
+      <a class="proyecto" href="proyectos/seguridad-ciudadana.html" data-aparece style="--d:120"><div class="arte"><svg viewBox="0 0 600 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+<rect width="600" height="460" fill="#0f1a30"/>
+<g stroke="#263b63" stroke-width="1"><path d="M0 0V460"/><path d="M40 0V460"/><path d="M80 0V460"/><path d="M120 0V460"/><path d="M160 0V460"/><path d="M200 0V460"/><path d="M240 0V460"/><path d="M280 0V460"/><path d="M320 0V460"/><path d="M360 0V460"/><path d="M400 0V460"/><path d="M440 0V460"/><path d="M480 0V460"/><path d="M520 0V460"/><path d="M560 0V460"/><path d="M0 0H600"/><path d="M0 40H600"/><path d="M0 80H600"/><path d="M0 120H600"/><path d="M0 160H600"/><path d="M0 200H600"/><path d="M0 240H600"/><path d="M0 280H600"/><path d="M0 320H600"/><path d="M0 360H600"/><path d="M0 400H600"/><path d="M0 440H600"/></g>
+<g stroke="#b5c73a" stroke-width="2" fill="none" opacity=".85"><path d="M300 230 120 120M300 230 470 110M300 230 520 300M300 230 150 340M300 230 330 400M300 230 220 70"/></g>
+<g fill="#d8effb"><circle cx="120" cy="120" r="7"/><circle cx="470" cy="110" r="7"/><circle cx="520" cy="300" r="7"/><circle cx="150" cy="340" r="7"/><circle cx="330" cy="400" r="7"/><circle cx="220" cy="70" r="7"/></g>
+<circle cx="300" cy="230" r="34" fill="none" stroke="#b5c73a" stroke-width="4"/><circle cx="300" cy="230" r="14" fill="#b5c73a"/>
+<g class="flota" transform="translate(380 160)"><path d="M0 0h70v10H0z" fill="#e9edf1"/><rect x="40" y="10" width="70" height="40" rx="8" fill="#f4f6f8"/><circle cx="96" cy="30" r="11" fill="#1c2d4c"/><circle cx="96" cy="30" r="4" fill="#b5c73a"/><path d="M110 30 190 -10 190 70z" fill="#b5c73a" opacity=".18"/></g>
+</svg></div><div class="texto"><span class="etiqueta">Seguridad</span><h3>Red departamental de seguridad</h3><p>Cámaras en 48 municipios conectadas a un nodo departamental de monitoreo.</p><span class="ir">Ver la experiencia 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="seccion celeste" aria-labelledby="datos-t">
+  <div class="contenedor">
+    <p class="antetitulo">Antioquia en datos</p>
+    <h2 id="datos-t" data-aparece>¿Cómo se distribuye nuestro trabajo?</h2>
+    <div style="margin-top:28px"><figure class="grafica" data-tipo="barras" data-datos="d-sub" data-titulo="Presencia por subregión" data-aparece>
+  <header><h3>Presencia por subregión</h3><div class="chips" role="group" aria-label="Cambiar la métrica"><button type="button" class="chip" data-metrica="0" aria-pressed="true">Sedes educativas conectadas</button><button type="button" class="chip" data-metrica="1" aria-pressed="false">Cámaras integradas</button></div></header>
+  <div class="lienzo"></div>
+  <figcaption class="nota">Totales de referencia de las fichas de proyecto; la distribución por municipio es ilustrativa para el prototipo. Pasa el cursor o usa la tecla Tab sobre las barras para ver el detalle.</figcaption>
+  <details><summary>Ver los datos en tabla</summary><table class="tabla"><caption class="sr-only">Presencia por subregión</caption><thead><tr><th scope="col">Subregión</th><th scope="col">Sedes conectadas</th><th scope="col">Cámaras integradas</th></tr></thead><tbody></tbody></table></details>
+</figure></div>
+  </div>
+</section>
+
+<section class="seccion" id="nosotros" aria-labelledby="nos-t">
+  <div class="contenedor grid g2" style="align-items:center">
+    <div data-aparece>
+      <p class="antetitulo">Nosotros</p>
+      <h2 id="nos-t">Diez años integrando tecnología para el sector público</h2>
+      <p class="entrada">Valor+ S.A.S. es una empresa pública que diseña, integra y opera soluciones tecnológicas para entidades del Estado. Traducimos las necesidades del territorio en proyectos que funcionan.</p>
+      <a class="boton marino" href="transparencia.html#t1">Misión, visión y estructura <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="cifras" data-aparece style="--d:120">
+      <div class="cifra"><p class="n">360°</p><p>Integramos tecnología, operación y experiencia de usuario.</p></div>
+      <div class="cifra"><p class="n">+</p><p>Generamos valor público medible en cada proyecto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion celeste" id="ciudadania" aria-labelledby="ciu-t">
+  <div class="contenedor">
+    <p class="antetitulo">Ciudadanía</p>
+    <h2 id="ciu-t" data-aparece>Información y servicios a un clic</h2>
+    <div class="grid g3" style="margin-top:32px"><a class="cat" href="transparencia.html" data-aparece style="--d:0"><span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span><span><h3>Transparencia</h3><p>Información pública según la Ley 1712 de 2014.</p></span></a><a class="cat" href="atencion-ciudadania.html#pqrsd" data-aparece style="--d:60"><span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span><span><h3>PQRSD</h3><p>Radica y consulta peticiones, quejas, reclamos, sugerencias y denuncias.</p></span></a><a class="cat" href="participa.html" data-aparece style="--d:120"><span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span><span><h3>Participa</h3><p>Rendición de cuentas y espacios de diálogo con la ciudadanía.</p></span></a><a class="cat" href="transparencia.html#t3" data-aparece style="--d:180"><span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span><span><h3>Contratación</h3><p>Convocatorias, invitaciones y plan anual de adquisiciones.</p></span></a><a class="cat" href="transparencia.html#t7" data-aparece style="--d:240"><span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span><span><h3>Datos abiertos</h3><p>Conjuntos de datos e instrumentos de gestión de la información.</p></span></a><a class="cat" href="atencion-ciudadania.html" data-aparece style="--d:300"><span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span><span><h3>Atención</h3><p>Canales, horarios y sede de atención presencial.</p></span></a></div>
+  </div>
+</section>
+</main>
+<footer class="pie">
+  <div class="contenedor">
+    <div class="columnas">
+      <div><a class="marca" href="index.html"><img src="assets/img/logo-blanco.svg" alt="Valor+" width="200" height="36"></a>
+        <p>Integramos servicios y procesos tecnológicos para las entidades públicas de Antioquia.</p><div class="redes"><a href="https://www.facebook.com/ValorMasOficial/" target="_blank" rel="noopener" aria-label="Facebook de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a><a href="https://www.instagram.com/valormas/" target="_blank" rel="noopener" aria-label="Instagram de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a><a href="https://x.com/valormas" target="_blank" rel="noopener" aria-label="X de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.3l-4.9-6.4L5.2 21H2.1l7.3-8.3L1.8 3h6.4l4.4 5.9zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg></a><a href="https://co.linkedin.com/company/valormasoficial" target="_blank" rel="noopener" aria-label="LinkedIn de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg></a></div></div>
+      <div><h2>Contacto</h2><address>
+        <span><strong>Valor+ S.A.S.</strong></span>
+        <span>Calle 41 N.° 52-28, Edificio Edatel, piso 3, sector La Alpujarra, Medellín, Antioquia</span>
+        <span>Horario: lunes a jueves de 7:30 a. m. a 5:30 p. m.; viernes de 7:30 a. m. a 1:30 p. m.</span>
+        <span>Teléfono: <a href="tel:+576044443747">+57 (604) 444 3747</a> · Línea gratuita: <a href="tel:018000415379">01 8000 415 379</a></span>
+      </address></div>
+      <div><h2>Canales oficiales</h2><ul>
+        <li>PQRSD: <a href="mailto:pqrds@valormas.gov.co">pqrds@valormas.gov.co</a></li>
+        <li>Notificaciones judiciales: <a href="mailto:notificaciones@valormas.gov.co">notificaciones@valormas.gov.co</a></li>
+        <li>Línea anticorrupción: <a href="mailto:transparencia@valormas.gov.co">transparencia@valormas.gov.co</a></li>
+      </ul></div>
+      <div><h2>Enlaces</h2><ul>
+        <li><a href="transparencia.html">Transparencia y acceso a la información pública</a></li>
+        <li><a href="atencion-ciudadania.html">Atención y servicios a la ciudadanía</a></li>
+        <li><a href="participa.html">Participa</a></li>
+        <li><a href="politicas.html">Política de tratamiento de datos personales</a></li>
+        <li><a href="accesibilidad.html">Accesibilidad</a></li>
+        <li><a href="mapa-del-sitio.html">Mapa del sitio</a></li>
+      </ul></div>
+    </div>
+    <div class="base"><p>© <span data-anio>2026</span> Valor+ S.A.S. Última actualización: 4 de noviembre de 2026.</p><p>Prototipo v1.0 · Contenido y diseño de propuesta</p></div>
+  </div>
+</footer>
+<div class="govco-pie" role="region" aria-label="Pie GOV.CO"><div class="contenedor"><a href="https://www.gov.co/" target="_blank" rel="noopener"><img src="assets/img/co-govco.png" alt="Marca país Colombia y GOV.CO (abre en una pestaña nueva)" width="163" height="38"></a><p>Sitio de entidad pública del orden departamental</p></div></div>
+<button class="flotante-a11y" type="button" data-abrir-a11y aria-haspopup="dialog" aria-label="Opciones de accesibilidad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5c2.3.7 4.6 1 7 1s4.7-.3 7-1M12 9.5v4.5M12 14l-3 6.5M12 14l3 6.5"/></svg></button>
+<dialog class="a11y" id="a11y" aria-labelledby="a11y-t">
+  <header><h2 id="a11y-t">Accesibilidad</h2><button class="icono-btn" type="button" data-cerrar aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+  <div class="cuerpo">
+    <div class="opcion"><span id="esc-t">Tamaño del texto</span><div class="seg" role="group" aria-labelledby="esc-t"><button type="button" data-escala="1">A</button><button type="button" data-escala="1.15">A+</button><button type="button" data-escala="1.3">A++</button></div></div>
+    <div class="opcion"><span id="sw-c">Alto contraste</span><button type="button" class="interruptor" role="switch" aria-checked="false" aria-labelledby="sw-c" data-sw="contraste"></button></div>
+    <div class="opcion"><span id="sw-m">Detener animaciones</span><button type="button" class="interruptor" role="switch" aria-checked="false" aria-labelledby="sw-m" data-sw="movimiento"></button></div>
+    <button class="boton borde mini" type="button" data-restablecer>Restablecer</button>
+    <p class="nota">Este sitio sigue las pautas WCAG 2.1 nivel AA (Resolución MinTIC 1519 de 2020). <a href="accesibilidad.html">Declaración de accesibilidad</a>.</p>
+  </div>
+</dialog>
+<script type="application/json" id="d-sub">{"categorias": ["Valle de Aburrá", "Bajo Cauca", "Magdalena Medio", "Nordeste", "Norte", "Occidente", "Oriente", "Suroeste", "Urabá"], "metricas": [{"nombre": "Sedes educativas conectadas", "unidad": "sedes", "valores": [1, 84, 58, 83, 122, 125, 143, 106, 148]}, {"nombre": "Cámaras integradas", "unidad": "cámaras", "valores": [116, 58, 54, 62, 129, 104, 185, 130, 74]}]}</script>
+</body>
+</html>

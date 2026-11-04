@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red departamental de seguridad | Valor+</title>
+<meta name="description" content="Recorrido 3D de la red de cámaras de seguridad de Antioquia y su nodo departamental.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1c2d4c">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/css/app.css">
+<script>(function(){try{var d=document.documentElement,s=localStorage,e=s.getItem('v1.escala'),c=s.getItem('v1.contraste'),m=s.getItem('v1.movimiento');if(e)d.style.setProperty('--escala',e);if(c)d.dataset.contraste='alto';d.dataset.movimiento=m||(matchMedia('(prefers-reduced-motion: reduce)').matches?'no':'si');}catch(x){}})();</script>
+<script src="../assets/js/base.js" defer></script>
+<link rel="modulepreload" href="../assets/js/vendor/three.module.min.js">
+<script type="module" src="../assets/js/interaccion.js"></script>
+</head>
+<body data-pagina="seguridad">
+<a class="saltar" href="#contenido">Saltar al contenido principal</a>
+<div class="govco" role="region" aria-label="Barra del portal GOV.CO"><div class="contenedor"><a href="https://www.gov.co/" target="_blank" rel="noopener"><img src="../assets/img/govco.svg" alt="GOV.CO, portal del Estado colombiano (abre en una pestaña nueva)" width="101" height="22"></a></div></div>
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="../index.html" aria-label="Valor+, ir al inicio"><img class="pos" src="../assets/img/logo.svg" alt="" width="180" height="32"><img class="neg" src="../assets/img/logo-blanco.svg" alt="" width="180" height="32"></a>
+    <nav class="menu" aria-label="Menú principal"><ul><li><a href="../index.html">Inicio</a></li><li><a href="../index.html#nosotros">Nosotros</a></li><li><a href="../index.html#servicios">Servicios</a></li><li><a href="../index.html#proyectos" aria-current="page">Proyectos</a></li><li><a href="../transparencia.html">Transparencia</a></li><li><a href="../atencion-ciudadania.html">Atención a la ciudadanía</a></li><li><a href="../participa.html">Participa</a></li></ul></nav>
+    <div class="acciones">
+      <button class="icono-btn" type="button" data-abrir-a11y aria-haspopup="dialog" aria-label="Opciones de accesibilidad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5c2.3.7 4.6 1 7 1s4.7-.3 7-1M12 9.5v4.5M12 14l-3 6.5M12 14l3 6.5"/></svg></button>
+      <a class="boton lima mini" href="../atencion-ciudadania.html#pqrsd">PQRSD</a>
+      <button class="icono-btn btn-menu" type="button" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="menu-movil" id="menu-movil" role="dialog" aria-modal="true" aria-label="Menú">
+  <button class="icono-btn cerrar" type="button" aria-label="Cerrar menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <nav aria-label="Menú principal (móvil)"><ul><li><a href="../index.html">Inicio</a></li><li><a href="../index.html#nosotros">Nosotros</a></li><li><a href="../index.html#servicios">Servicios</a></li><li><a href="../index.html#proyectos">Proyectos</a></li><li><a href="../transparencia.html">Transparencia</a></li><li><a href="../atencion-ciudadania.html">Atención a la ciudadanía</a></li><li><a href="../participa.html">Participa</a></li><li><a href="../atencion-ciudadania.html#pqrsd">Radicar una PQRSD</a></li></ul></nav>
+</div>
+<main id="contenido" tabindex="-1">
+
+<section class="cabeza-pagina">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación"><ol><li><a href="../index.html">Inicio</a></li><li><a href="../index.html#proyectos">Proyectos</a></li><li aria-current="page">Red departamental de seguridad</li></ol></nav>
+    <p class="antetitulo">Seguridad</p>
+    <h1>Red departamental de seguridad</h1>
+    <p class="entrada" style="color:#c9d4e6">Cámaras, nodos y operación continua para municipios más seguros. Haz scroll para recorrer la red en 3D.</p>
+  </div>
+</section>
+<section class="relato" id="relato-red" aria-label="Recorrido 3D de la red de seguridad">
+  <div class="relato-escena" id="escena-red"><div class="control-3d" role="group" aria-label="Controles del mapa 3D"><button type="button" class="icono-btn" data-zoom="mas" aria-label="Acercar el mapa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button><button type="button" class="icono-btn" data-zoom="menos" aria-label="Alejar el mapa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/></svg></button><button type="button" class="icono-btn" data-zoom="centro" aria-label="Volver a la vista general"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button></div>
+<p class="ayuda-3d" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4.5a1.5 1.5 0 0 1 3 0V12M14 11.5V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3 14.5a1.5 1.5 0 0 1 2.4-1.8L8 15"/></svg> Arrastra para girar · Rueda o pellizco para acercar</p></div>
+  <div class="relato-pasos"><article class="paso" data-paso="0"><div class="caja"><p class="num">01 · La red</p><h2>Una sola red para 48 municipios</h2><p>Más de 900 cámaras de municipios de todas las subregiones envían su señal a un nodo departamental de seguridad. Gira el mapa: los arcos muestran el viaje de los datos.</p></div></article><article class="paso" data-paso="1"><div class="caja"><p class="num">02 · El nodo departamental</p><h2>El centro que lo ve todo</h2><p>En Medellín, el nodo departamental recibe, almacena y monitorea las cámaras. Desde allí se coordinan alertas con las autoridades.</p></div></article><article class="paso" data-paso="2"><div class="caja"><p class="num">03 · Nodos subregionales</p><h2>Cerca de cada territorio</h2><p>Los nodos subregionales concentran la señal de su zona y la retransmiten. Hay nodos en operación y otros en proceso de puesta en marcha.</p></div></article><article class="paso" data-paso="3"><div class="caja"><p class="num">04 · Operación continua</p><h2>Instalación, soporte y mantenimiento</h2><p>Valor+ gerencia la implementación, el mantenimiento preventivo y correctivo y la mesa de ayuda, para que cada cámara esté disponible cuando se necesita.</p></div></article></div>
+</section>
+<section class="seccion" aria-labelledby="cam-t">
+  <div class="contenedor">
+    <p class="antetitulo">Tecnología</p>
+    <h2 id="cam-t" data-aparece>Conoce las cámaras de la red</h2>
+    <p class="entrada" data-aparece>Gira cada equipo, acércate y mira su campo de visión. También puedes elegir un tipo de cámara en la gráfica.</p>
+    <div class="visor" style="margin-top:28px">
+      <div class="visor-escena" id="visor-camaras"></div>
+      <div class="visor-info">
+        <div class="tabs" role="tablist" aria-label="Tipos de cámara" id="tabs-camaras"><button type="button" role="tab" id="tab-c0" aria-controls="pan-c0" aria-selected="true" tabindex="0">Autodomo PTZ</button><button type="button" role="tab" id="tab-c1" aria-controls="pan-c1" aria-selected="false" tabindex="-1">Lectura de placas (LPR)</button><button type="button" role="tab" id="tab-c2" aria-controls="pan-c2" aria-selected="false" tabindex="-1">Multisensor</button></div>
+        <div role="tabpanel" id="pan-c0" aria-labelledby="tab-c0"><p class="entrada" style="font-size:1.05rem">Gira 360°, inclina y acerca con zoom óptico para seguir un evento en tiempo real.</p><ul class="specs"><li>Movimiento horizontal y vertical continuo</li><li>Zoom óptico para detalle a distancia</li><li>Ideal para plazas, parques e intersecciones</li></ul></div><div role="tabpanel" id="pan-c1" aria-labelledby="tab-c1" hidden><p class="entrada" style="font-size:1.05rem">Reconoce automáticamente las placas de los vehículos que pasan por su campo de visión.</p><ul class="specs"><li>Lectura día y noche con iluminación infrarroja</li><li>Alertas de vehículos reportados</li><li>Ubicada en entradas y salidas de los municipios</li></ul></div><div role="tabpanel" id="pan-c2" aria-labelledby="tab-c2" hidden><p class="entrada" style="font-size:1.05rem">Cuatro sensores en un solo equipo cubren varias direcciones a la vez.</p><ul class="specs"><li>Vista panorámica sin puntos ciegos</li><li>Menos equipos para cubrir más área</li><li>Ideal para corredores y espacios amplios</li></ul></div>
+        <figure class="grafica" data-tipo="dona" data-datos="s-cam" data-titulo="Cámaras nuevas por tipo" id="grafica-camaras">
+          <header><h3>217 cámaras nuevas por tipo</h3></header><div class="lienzo" style="max-width:260px;margin-inline:auto"></div>
+          <details><summary>Ver los datos en tabla</summary><table class="tabla"><thead><tr><th scope="col">Tipo</th><th scope="col">Cámaras</th><th scope="col">%</th></tr></thead><tbody></tbody></table></details>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="seccion marino" aria-labelledby="fl-t">
+  <div class="contenedor">
+    <p class="antetitulo">Cómo funciona</p>
+    <h2 id="fl-t" data-aparece>De la cámara a la respuesta</h2>
+    <ol class="flujo" data-detalle="det-seg" style="margin-top:28px"><li><button type="button" aria-pressed="true" data-texto="La cámara registra imagen de forma continua y, en el caso de las LPR, identifica placas automáticamente."><strong>Captura</strong></button></li><li><button type="button" aria-pressed="false" data-texto="La señal viaja por fibra o radioenlace hasta el nodo subregional y luego al nodo departamental."><strong>Transmisión</strong></button></li><li><button type="button" aria-pressed="false" data-texto="Operadores en el nodo departamental observan, graban y analizan; las alertas se priorizan en tiempo real."><strong>Monitoreo</strong></button></li><li><button type="button" aria-pressed="false" data-texto="La información se comparte con la Policía y las autoridades municipales para actuar con rapidez."><strong>Respuesta</strong></button></li></ol>
+    <div class="flujo-detalle" id="det-seg" aria-live="polite">La cámara registra imagen de forma continua y, en el caso de las LPR, identifica placas automáticamente.</div>
+  </div>
+</section>
+<section class="seccion celeste" aria-labelledby="sd-t">
+  <div class="contenedor">
+    <p class="antetitulo">Datos de la red</p>
+    <h2 id="sd-t" data-aparece>Cobertura por subregión</h2>
+    <div style="margin-top:28px"><figure class="grafica" data-tipo="barras" data-datos="s-sub" data-titulo="Cámaras y municipios por subregión" data-aparece>
+  <header><h3>Cámaras y municipios por subregión</h3><div class="chips" role="group" aria-label="Cambiar la métrica"><button type="button" class="chip" data-metrica="0" aria-pressed="true">Cámaras integradas</button><button type="button" class="chip" data-metrica="1" aria-pressed="false">Municipios conectados</button></div></header>
+  <div class="lienzo"></div>
+  <figcaption class="nota">Totales de referencia de las fichas de proyecto; la distribución por municipio es ilustrativa para el prototipo. Pasa el cursor o usa la tecla Tab sobre las barras para ver el detalle.</figcaption>
+  <details><summary>Ver los datos en tabla</summary><table class="tabla"><caption class="sr-only">Cámaras y municipios por subregión</caption><thead><tr><th scope="col">Subregión</th><th scope="col">Cámaras</th><th scope="col">Municipios</th></tr></thead><tbody></tbody></table></details>
+</figure></div>
+  </div>
+</section>
+</main>
+<footer class="pie">
+  <div class="contenedor">
+    <div class="columnas">
+      <div><a class="marca" href="../index.html"><img src="../assets/img/logo-blanco.svg" alt="Valor+" width="200" height="36"></a>
+        <p>Integramos servicios y procesos tecnológicos para las entidades públicas de Antioquia.</p><div class="redes"><a href="https://www.facebook.com/ValorMasOficial/" target="_blank" rel="noopener" aria-label="Facebook de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a><a href="https://www.instagram.com/valormas/" target="_blank" rel="noopener" aria-label="Instagram de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a><a href="https://x.com/valormas" target="_blank" rel="noopener" aria-label="X de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.3l-4.9-6.4L5.2 21H2.1l7.3-8.3L1.8 3h6.4l4.4 5.9zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg></a><a href="https://co.linkedin.com/company/valormasoficial" target="_blank" rel="noopener" aria-label="LinkedIn de Valor+ (abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg></a></div></div>
+      <div><h2>Contacto</h2><address>
+        <span><strong>Valor+ S.A.S.</strong></span>
+        <span>Calle 41 N.° 52-28, Edificio Edatel, piso 3, sector La Alpujarra, Medellín, Antioquia</span>
+        <span>Horario: lunes a jueves de 7:30 a. m. a 5:30 p. m.; viernes de 7:30 a. m. a 1:30 p. m.</span>
+        <span>Teléfono: <a href="tel:+576044443747">+57 (604) 444 3747</a> · Línea gratuita: <a href="tel:018000415379">01 8000 415 379</a></span>
+      </address></div>
+      <div><h2>Canales oficiales</h2><ul>
+        <li>PQRSD: <a href="mailto:pqrds@valormas.gov.co">pqrds@valormas.gov.co</a></li>
+        <li>Notificaciones judiciales: <a href="mailto:notificaciones@valormas.gov.co">notificaciones@valormas.gov.co</a></li>
+        <li>Línea anticorrupción: <a href="mailto:transparencia@valormas.gov.co">transparencia@valormas.gov.co</a></li>
+      </ul></div>
+      <div><h2>Enlaces</h2><ul>
+        <li><a href="../transparencia.html">Transparencia y acceso a la información pública</a></li>
+        <li><a href="../atencion-ciudadania.html">Atención y servicios a la ciudadanía</a></li>
+        <li><a href="../participa.html">Participa</a></li>
+        <li><a href="../politicas.html">Política de tratamiento de datos personales</a></li>
+        <li><a href="../accesibilidad.html">Accesibilidad</a></li>
+        <li><a href="../mapa-del-sitio.html">Mapa del sitio</a></li>
+      </ul></div>
+    </div>
+    <div class="base"><p>© <span data-anio>2026</span> Valor+ S.A.S. Última actualización: 4 de noviembre de 2026.</p><p>Prototipo v1.0 · Contenido y diseño de propuesta</p></div>
+  </div>
+</footer>
+<div class="govco-pie" role="region" aria-label="Pie GOV.CO"><div class="contenedor"><a href="https://www.gov.co/" target="_blank" rel="noopener"><img src="../assets/img/co-govco.png" alt="Marca país Colombia y GOV.CO (abre en una pestaña nueva)" width="163" height="38"></a><p>Sitio de entidad pública del orden departamental</p></div></div>
+<button class="flotante-a11y" type="button" data-abrir-a11y aria-haspopup="dialog" aria-label="Opciones de accesibilidad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5c2.3.7 4.6 1 7 1s4.7-.3 7-1M12 9.5v4.5M12 14l-3 6.5M12 14l3 6.5"/></svg></button>
+<dialog class="a11y" id="a11y" aria-labelledby="a11y-t">
+  <header><h2 id="a11y-t">Accesibilidad</h2><button class="icono-btn" type="button" data-cerrar aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+  <div class="cuerpo">
+    <div class="opcion"><span id="esc-t">Tamaño del texto</span><div class="seg" role="group" aria-labelledby="esc-t"><button type="button" data-escala="1">A</button><button type="button" data-escala="1.15">A+</button><button type="button" data-escala="1.3">A++</button></div></div>
+    <div class="opcion"><span id="sw-c">Alto contraste</span><button type="button" class="interruptor" role="switch" aria-checked="false" aria-labelledby="sw-c" data-sw="contraste"></button></div>
+    <div class="opcion"><span id="sw-m">Detener animaciones</span><button type="button" class="interruptor" role="switch" aria-checked="false" aria-labelledby="sw-m" data-sw="movimiento"></button></div>
+    <button class="boton borde mini" type="button" data-restablecer>Restablecer</button>
+    <p class="nota">Este sitio sigue las pautas WCAG 2.1 nivel AA (Resolución MinTIC 1519 de 2020). <a href="../accesibilidad.html">Declaración de accesibilidad</a>.</p>
+  </div>
+</dialog>
+<script type="application/json" id="s-sub">{"categorias": ["Valle de Aburrá", "Bajo Cauca", "Magdalena Medio", "Nordeste", "Norte", "Occidente", "Oriente", "Suroeste", "Urabá"], "metricas": [{"nombre": "Cámaras integradas", "unidad": "cámaras", "valores": [116, 58, 54, 62, 129, 104, 185, 130, 74]}, {"nombre": "Municipios conectados", "unidad": "municipios", "valores": [6, 4, 3, 4, 6, 5, 9, 7, 4]}]}</script><script type="application/json" id="s-cam">{"etiquetas": ["Autodomo PTZ", "Lectura de placas (LPR)", "Multisensor"], "valores": [154, 48, 15], "colores": ["#1c2d4c", "#b5c73a", "#8fbf9b"], "centro": "cámaras nuevas"}</script>
+</body>
+</html>
