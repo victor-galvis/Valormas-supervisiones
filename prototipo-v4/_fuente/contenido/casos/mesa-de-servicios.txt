@@ -1,0 +1,15 @@
+Ofertas de Valor+
+[IMG] https://valormas.gov.co/wp-content/uploads/2024/09/Caso-de-exito-3-1.webp alt=
+Mesa de Servicios
+OBJETIVO
+Prestar el servicio para la administración y operación de la Mesa de Servicios de la Gobernación de Antioquia MEGANT, servicios de hosting corporativos y servicios de apoyo para la apropiada operación de la plataforma tecnológica utilizada en la Administración Departamental
+IMPACTO
+Funcionarios de la Gobernación de Antioquia y contratistas.
+LOGROS
+Se logró iniciar la implementación y mejora de las siguientes prácticas ITIL v4 que tienen que ver directamente con la operación; con el propósito de promover la entrega de mejores servicios de TI y a su vez impulsar la mejora continua dentro del equipo de tecnología; dichas prácticas son: Gestión de informes, Gestión de niveles del servicio, Gestión de incidentes, Gestión de requerimientos, Gestión de cambios, Gestión de problemas, Gestión del conocimiento, Gestión de accesos, Gestión de activos de TI, Gestión de la configuración, Gestión de la disponibilidad, Gestión de la capacidad, Monitoreo y Gestión de eventos.
+Se inicia acompañamiento en estrategia de monitoreo al cumplimiento de ANS de incidentes y requerimientos, a través del informe de operación MEGANT en Power BI; el cual ha sido diseñado desde la práctica Gestión de informes y Gestión de niveles de servicio. Meta mensual 95%, resultado de enero a diciembre del presente año 97, 49%
+Se finaliza diseño, pruebas y publicación de informe Aseguramiento de la Calidad MEGANT en Power BI (Percepción del servicio, Satisfacción global, Causas de satisfacción/Insatisfacción,Encuestas enviadas vs contestadas y SQA).
+Se realiza levantamiento de información para el cálculo de indicadores asociados al Tiempo de atención y Tiempo de solución, correspondiente a todos los medios de registro en el informe de operación MEGANT de Power BI; incluyendo el tiempo que tarda la creación de los casos que ingresan por el medio de registro MAIL.
+Creación de flujos de tareas automático en el catálogo de servicios.
+CIFRAS O DATOS DESTACABLES
+[IMG] https://valormas.gov.co/wp-content/uploads/2024/10/Caso-de-Exito-Mesa-de-Servicios_grafica-mesa-de-servicios-scaled.webp alt=

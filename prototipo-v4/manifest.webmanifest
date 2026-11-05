@@ -1,0 +1,16 @@
+{
+  "name": "Valor+ S.A.S.",
+  "short_name": "Valor+",
+  "lang": "es-CO",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0c264c",
+  "theme_color": "#0c264c",
+  "icons": [
+    {
+      "src": "assets/img/marca/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
